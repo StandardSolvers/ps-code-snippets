@@ -11,6 +11,12 @@ repositories {
   mavenCentral()
 }
 
+dependencies {
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+  testImplementation("org.mockito:mockito-junit-jupiter:3.11.2")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+}
+
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
 intellij {
@@ -43,5 +49,9 @@ tasks {
 
   publishPlugin {
     token.set(System.getenv("PUBLISH_TOKEN"))
+  }
+
+  test {
+    useJUnitPlatform()
   }
 }

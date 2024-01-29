@@ -30,7 +30,7 @@
     <action id="Snippet4PSAction" class="org.standardsolvers.pscodesnippets.action.Snippet4PSAction"
             text="code snippet completion for problem solving action"
             description="this is code snippet completion for problem solving action">
-      <add-to-group group-id="CodeMenu" anchor="last"/>
+      <add-to-group group-id="EditorPopupMenu" anchor="last"/>
     </action>
   </actions>
 </idea-plugin>
