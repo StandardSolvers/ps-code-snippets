@@ -24,13 +24,6 @@
   <!-- Extension points defined by the plugin.
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
   <extensions defaultExtensionNs="com.intellij">
-
+    <completion.contributor language="JAVA" implementationClass="org.standardsolvers.pscodesnippets.completion.contributor.AlgorithmCompletionContributor"/>
   </extensions>
-  <actions>
-    <action id="Snippet4PSAction" class="org.standardsolvers.pscodesnippets.action.Snippet4PSAction"
-            text="code snippet completion for problem solving action"
-            description="this is code snippet completion for problem solving action">
-      <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-    </action>
-  </actions>
 </idea-plugin>

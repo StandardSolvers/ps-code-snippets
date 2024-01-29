@@ -29,13 +29,13 @@ public class AlgorithmHelper {
         algorithmMap.clear();
     }
 
-    public <T  extends Algorithm> Optional<Algorithm> find(String algorithmName) throws ClassNotFoundException {
+    public <T  extends Algorithm> Optional<Algorithm> find(String algorithmName) {
         try {
             // 찾기   - with find(Class<T> algorithmClass)
             Class<T> algorithmClass = (Class<T>) Class.forName(algorithmName);
             return find(algorithmClass);
         }catch (ClassNotFoundException exception){
-            log.warn("Algorithm not found: {}", algorithmName, exception);
+//            log.warn("Algorithm not found: {}", algorithmName, exception);
             return Optional.empty();
         }
     }
@@ -43,7 +43,7 @@ public class AlgorithmHelper {
     public <T  extends Algorithm> Optional<Algorithm> find(Class<T> algorithmClass){
 
         if(algorithmMap.containsKey(algorithmClass)){
-            log.info("From cache: {}", algorithmClass);
+//            log.info("From cache: {}", algorithmClass);
             return Optional.ofNullable(algorithmMap.get(algorithmClass));
         }
 
@@ -51,18 +51,19 @@ public class AlgorithmHelper {
             Constructor<T> constructor = algorithmClass.getConstructor();
             T algorithm = constructor.newInstance();
             algorithmMap.put(algorithmClass, algorithm);
-            log.info("Add cache: {}", algorithmClass);
+//            log.info("Add cache: {}", algorithmClass);
             return Optional.ofNullable(algorithm);
 
         } catch (NoSuchMethodException exception){
-            log.warn("No such method found: {}", algorithmClass, exception);
+//            log.warn("No such method found: {}", algorithmClass, exception);
             return Optional.empty();
 
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException exception){
-            log.warn("Error instantiating algorithm: {}", algorithmClass, exception);
+//            log.warn("Error instantiating algorithm: {}", algorithmClass, exception);
             return Optional.empty();
 
         }
     }
+
 
 }
