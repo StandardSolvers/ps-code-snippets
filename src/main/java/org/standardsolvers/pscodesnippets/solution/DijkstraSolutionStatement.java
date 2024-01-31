@@ -7,31 +7,33 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class DijkstraSolutionStatement implements SolutionStatement{
-    class Node implements Comparable<Node> {
-        private int index;
-        private int distance;
 
-        public Node(int index, int distance) {
-            this.index = index;
-            this.distance = distance;
-        }
-
-        public int getIndex() {
-            return this.index;
-        }
-
-        public int getDistance() {
-            return this.distance;
-        }
-
-        @Override
-        public int compareTo(@NotNull DijkstraSolutionStatement.Node o) {
-            return this.distance < o.distance ? -1 : 1;
-        }
-    }
 
     @Override
     public void solution() {
+        class Node implements Comparable<Node> {
+            private int index;
+            private int distance;
+
+            public Node(int index, int distance) {
+                this.index = index;
+                this.distance = distance;
+            }
+
+            public int getIndex() {
+                return this.index;
+            }
+
+            public int getDistance() {
+                return this.distance;
+            }
+
+            @Override
+            public int compareTo(@NotNull Node o) {
+                return 0;
+            }
+        }
+
         int n=0,m,start =0;
         int []d = new int[10001];
         int INF = (int) 1e9;
