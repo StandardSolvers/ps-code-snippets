@@ -1,6 +1,8 @@
-package org.standardsolvers.pscodesnippets.solution;
+package org.standardsolvers.pscodesnippets.solution.dijkstra;
 
-public class Dijkstra implements Algorithm{
+import org.standardsolvers.pscodesnippets.solution.Algorithm;
+
+public class Dijkstra implements Algorithm {
 
     @Override
     public <T> Algorithm set(String key, T value) {
