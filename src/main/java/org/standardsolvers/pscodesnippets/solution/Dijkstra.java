@@ -11,4 +11,5 @@ public class Dijkstra implements Algorithm{
     public String getContext() {
         return "wow!";
     }
+
 }
