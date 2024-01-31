@@ -1,14 +1,13 @@
-package org.standardsolvers.pscodesnippets.solution;
+package org.standardsolvers.pscodesnippets.solution.dijkstra;
 
 import org.jetbrains.annotations.NotNull;
+import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-public class DijkstraSolutionStatement implements SolutionStatement{
-
-
+public class DijkstraSolutionStatement implements SolutionStatement {
     @Override
     public void solution() {
         class Node implements Comparable<Node> {
