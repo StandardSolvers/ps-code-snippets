@@ -10,7 +10,7 @@ public class AlgorithmHelperTest {
 
     public static class MockAlgorithm implements Algorithm {
         @Override
-        public <T> Algorithm setProperty(String key, T value) {
+        public <T> Algorithm set(String key, T value) {
             return this;
         }
 
@@ -31,26 +31,26 @@ public class AlgorithmHelperTest {
 
     @AfterEach
     void afterEach(){
-        algorithmHelper.clearMap();
+        algorithmHelper.clearCache();
     }
 
     @Test
-    void testFind_whenAlgorithmClassExistsNotInCache() {
-        Assertions.assertFalse(algorithmHelper.isExists(mockAlgorithmClass));
+    void testFind_whenAlgorithmClassNotCached() {
+        Assertions.assertFalse(algorithmHelper.isCached(mockAlgorithmClass));
         Optional<Algorithm> result = algorithmHelper.find(mockAlgorithmClass);
         Assertions.assertNotNull(result.orElse(null));
         Assertions.assertEquals(result.orElse(null).getContext(), mockAlgorithm.getContext());
-        Assertions.assertTrue(algorithmHelper.isExists(mockAlgorithmClass));
+        Assertions.assertTrue(algorithmHelper.isCached(mockAlgorithmClass));
 
     }
     @Test
-    void testFind_whenAlgorithmClassExistsInCache() {
+    void testFind_whenAlgorithmClassCached() {
         algorithmHelper.find(mockAlgorithmClass);
-        Assertions.assertTrue(algorithmHelper.isExists(mockAlgorithmClass));
+        Assertions.assertTrue(algorithmHelper.isCached(mockAlgorithmClass));
         Optional<Algorithm> result = algorithmHelper.find(mockAlgorithmClass);
         Assertions.assertNotNull(result.orElse(null));
         Assertions.assertEquals(result.orElse(null).getContext(), mockAlgorithm.getContext());
-        Assertions.assertTrue(algorithmHelper.isExists(mockAlgorithmClass));
+        Assertions.assertTrue(algorithmHelper.isCached(mockAlgorithmClass));
     }
     @Test
     void testFind_whenAlgorithmClassExists() {
@@ -59,4 +59,49 @@ public class AlgorithmHelperTest {
         Assertions.assertEquals(result.orElse(null).getContext(), mockAlgorithm.getContext());
     }
 
+
+
+    @Test
+    public void testIsExists_ValidAlgorithmName_ReturnsTrue() {
+        AlgorithmHelper helper = AlgorithmHelper.getInstance();
+
+        // Replace with a valid algorithm name
+        String validAlgorithmName = "SampleAlgorithm";
+
+        Assertions.assertTrue(helper.isExists(validAlgorithmName));
+    }
+
+    @Test
+    public void testIsExists_InvalidAlgorithmName_ReturnsFalse() {
+        AlgorithmHelper helper = AlgorithmHelper.getInstance();
+
+        // Replace with an invalid algorithm name
+        String invalidAlgorithmName = "InvalidAlgorithm";
+
+        Assertions.assertFalse(helper.isExists(invalidAlgorithmName));
+    }
+
+
+    @Test
+    void testFindByName_AlgorithmNotExists() {
+        AlgorithmHelper helper = AlgorithmHelper.getInstance();
+
+        Optional<Algorithm> result = helper.find("InvalidAlgorithm");
+
+        // The algorithm does not exist, so the result should be Optional.empty
+        Assertions.assertEquals(Optional.empty(), result);
+    }
+
+    @Test
+    void testFindByName_AlgorithmExistsNotCached() {
+        AlgorithmHelper helper = AlgorithmHelper.getInstance();
+
+        // Assuming "ExistingAlgorithm" is an algorithm that exists, but is not cached
+        Optional<Algorithm> result = helper.find("SampleAlgorithm");
+
+        // Since algorithm exists, the returned value should not be empty. Check result.isPresent()
+        Assertions.assertTrue(result.isPresent());
+        // Also it should now be cached.
+        Assertions.assertTrue(helper.isCached(result.get().getClass()));
+    }
 }

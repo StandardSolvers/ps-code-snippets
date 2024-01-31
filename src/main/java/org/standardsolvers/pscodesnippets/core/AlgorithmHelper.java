@@ -1,35 +1,44 @@
 package org.standardsolvers.pscodesnippets.core;
 
-import groovy.util.logging.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-@Slf4j
 public class AlgorithmHelper {
-    private static final Logger log = LoggerFactory.getLogger(AlgorithmHelper.class);
+    final String algorithmClassHeader = "org.standardsolvers.pscodesnippets.solution.";
+
     static AlgorithmHelper algorithmHelper = new AlgorithmHelper();
     Map<Class<? extends Algorithm>, Algorithm> algorithmMap = new HashMap<>();
     private AlgorithmHelper(){}
-
 
     public static AlgorithmHelper getInstance() {
         return algorithmHelper;
     }
 
-    public <T  extends Algorithm> boolean isExists(Class<T> algorithmClass){
+    public boolean isExists(String algorithmName){
+        algorithmName = algorithmClassHeader + algorithmName;
+        try {
+            // 찾기   - with find(Class<T> algorithmClass)
+            Class.forName(algorithmName);
+            return true;
+        }catch (ClassNotFoundException exception){
+//            log.warn("Algorithm not found: {}", algorithmName, exception);
+            return false;
+        }
+    }
+
+    public <T  extends Algorithm> boolean isCached(Class<T> algorithmClass){
         return algorithmMap.containsKey(algorithmClass);
     }
 
-    public void clearMap(){
+    public void clearCache(){
         algorithmMap.clear();
     }
 
     public <T  extends Algorithm> Optional<Algorithm> find(String algorithmName) {
+        algorithmName = algorithmClassHeader + algorithmName;
         try {
             // 찾기   - with find(Class<T> algorithmClass)
             Class<T> algorithmClass = (Class<T>) Class.forName(algorithmName);
