@@ -3,16 +3,14 @@ package org.standardsolvers.pscodesnippets.core;
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class SimpleAlgorithmManagerImplement implements AlgorithmManager {
 
     static AlgorithmManager algorithmHelper = new SimpleAlgorithmManagerImplement();
-    AlgorithmFinder algorithmIoFinder = new AlgorithmFinder();
+    AlgorithmProvider algorithmProvider = new AlgorithmProviderImplement();
+    Map<String, List<Algorithm>> algorithmMap = new HashMap<>();
 
-    Map<Class<? extends Algorithm>, Algorithm> algorithmMap = new HashMap<>();
     private SimpleAlgorithmManagerImplement(){}
     public static AlgorithmManager getInstance() {
         return algorithmHelper;
@@ -20,71 +18,51 @@ public class SimpleAlgorithmManagerImplement implements AlgorithmManager {
 
     @Override
     public boolean isExists(String algorithmName){
-        try {
-            List<String> algorithmNameList = algorithmIoFinder.findFullClassName(algorithmName);
-            // 찾기   - with find(Class<T> algorithmClass)
+        if(isCached(algorithmName)){
+            return true;
+
+        } else try {
+            String algorithmClassName = algorithmName + "Algorithm";
+            List<String> algorithmNameList = algorithmProvider.findFullClassName(algorithmClassName);
             return !algorithmNameList.isEmpty();
-        } catch (IOException | NullPointerException exception) {
-//            log.warn("Algorithm not found: {}", algorithmName, exception);
-            // System.out.println(exception);
+
+        } catch (IOException exception) {
             return false;
+
         }
     }
 
     @Override
     public <T  extends Algorithm> List<Algorithm> find(String algorithmName) {
-        List<Algorithm> result = new ArrayList<>();
-        try{
-            List<String> algorithmNameList = algorithmIoFinder.findFullClassName(algorithmName);
+        String algorithmClassName = algorithmName + "Algorithm";
 
-            for (String fullClassName : algorithmNameList) {
-                try {
-                    Class<T> algorithmClass = (Class<T>) Class.forName(fullClassName);
-                    Algorithm algorithm = find(algorithmClass).orElseThrow(ClassNotFoundException::new);
-                    result.add(algorithm);
-                } catch (ClassNotFoundException ignored) {
-                    // System.out.println(ignored);
-                }
-            }
+        if(isCached(algorithmName)){
+            return getCached(algorithmName);
+
+        } else try {
+            List<Algorithm> result = algorithmProvider.find(algorithmClassName);
+            putCache(algorithmName, result);
             return result;
+
         } catch (IOException exception) {
-            // System.out.println(exception);
-//            log.warn("Algorithm not found: {}", algorithmName, exception);
             return List.of();
-        }
-    }
-
-    @Override
-    public <T  extends Algorithm> Optional<Algorithm> find(Class<T> algorithmClass){
-
-        if(algorithmMap.containsKey(algorithmClass)){
-//            log.info("From cache: {}", algorithmClass);
-            return Optional.ofNullable(algorithmMap.get(algorithmClass));
-        }
-
-        try{
-            Constructor<T> constructor = algorithmClass.getConstructor();
-            T algorithm = constructor.newInstance();
-            algorithmMap.put(algorithmClass, algorithm);
-//            log.info("Add cache: {}", algorithmClass);
-            return Optional.of(algorithm);
-
-        } catch (NoSuchMethodException exception){
-//            log.warn("No such method found: {}", algorithmClass, exception);
-            // System.out.println(exception);
-            return Optional.empty();
-
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException exception){
-//            log.warn("Error instantiating algorithm: {}", algorithmClass, exception);
-            // System.out.println(exception);
-            return Optional.empty();
 
         }
     }
 
     @Override
-    public <T  extends Algorithm> boolean isCached(Class<T> algorithmClass){
-        return algorithmMap.containsKey(algorithmClass);
+    public void putCache(String algorithmName, List<Algorithm> algorithms){
+        algorithmMap.put(algorithmName, algorithms);
+    }
+
+    @Override
+    public <T  extends Algorithm> boolean isCached(String algorithmName){
+        return algorithmMap.containsKey(algorithmName);
+    }
+
+    @Override
+    public List<Algorithm> getCached(String algorithmName){
+        return algorithmMap.get(algorithmName);
     }
 
     @Override

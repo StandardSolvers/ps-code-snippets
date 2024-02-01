@@ -6,16 +6,15 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class AlgorithmFinder {
-    final Package p = Algorithm.class.getPackage();
-    public List<String> findFullClassName(String className) throws IOException {
-        Collection<URL> urls = ClasspathHelper.forPackage(p.getName());
+public class AlgorithmProviderImplement implements AlgorithmProvider{
+    final Package pack = Algorithm.class.getPackage();
+
+    @Override
+    public List<String> findFullClassName(String className) {
+        Collection<URL> urls = ClasspathHelper.forPackage(pack.getName());
 
         Reflections reflections = new Reflections(new ConfigurationBuilder()
                 .setUrls(urls)
@@ -23,11 +22,8 @@ public class AlgorithmFinder {
 
         Set<Class<? extends Algorithm>> allClasses = reflections.getSubTypesOf(Algorithm.class);
         List<String> result = allClasses.stream().map(Class::getName)
-                .filter(s -> s.endsWith("Algorithm") && s.contains(className))
+                .filter(s -> s.endsWith(className))
                 .toList();
-
-//        System.out.println("Total classes found: " + allClasses.size());
-//        System.out.println(String.join(",", result));
 
         return result;
     }

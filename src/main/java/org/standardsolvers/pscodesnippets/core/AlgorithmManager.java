@@ -8,7 +8,8 @@ import java.util.Optional;
 public interface AlgorithmManager {
     boolean isExists(String algorithmName);
     <T  extends Algorithm> List<Algorithm> find(String algorithmName);
-    <T  extends Algorithm> Optional<Algorithm> find(Class<T> algorithmClass);
-    <T  extends Algorithm> boolean isCached(Class<T> algorithmClass);
+    void putCache(String algorithmName, List<Algorithm> algorithms);
+    <T  extends Algorithm> boolean isCached(String algorithmClass);
+    List<Algorithm> getCached(String algorithmName);
     void clearCache();
 }
