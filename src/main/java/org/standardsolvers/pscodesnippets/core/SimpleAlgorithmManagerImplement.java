@@ -1,6 +1,8 @@
 package org.standardsolvers.pscodesnippets.core;
 
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
+import org.standardsolvers.pscodesnippets.solution.dijkstra.DijkstraAlgorithm;
+import org.standardsolvers.pscodesnippets.solution.sample.SampleAlgorithm;
 
 import java.io.IOException;
 import java.util.*;
@@ -30,6 +32,11 @@ public class SimpleAlgorithmManagerImplement implements AlgorithmManager {
             return false;
 
         }
+    }
+
+    @Override
+    public List<Algorithm> findAll() {
+        return List.of(new DijkstraAlgorithm(), new SampleAlgorithm());
     }
 
     @Override
