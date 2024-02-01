@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Optional;
 
 public class AlgorithmHelperTest {
@@ -86,10 +87,10 @@ public class AlgorithmHelperTest {
     void testFindByName_AlgorithmNotExists() {
         AlgorithmHelper helper = AlgorithmHelper.getInstance();
 
-        Optional<Algorithm> result = helper.find("InvalidAlgorithm");
+        List<Algorithm> result = helper.find("InvalidAlgorithm");
 
         // The algorithm does not exist, so the result should be Optional.empty
-        Assertions.assertEquals(Optional.empty(), result);
+        Assertions.assertEquals(0, result.size());
     }
 
     @Test
@@ -97,11 +98,11 @@ public class AlgorithmHelperTest {
         AlgorithmHelper helper = AlgorithmHelper.getInstance();
 
         // Assuming "ExistingAlgorithm" is an algorithm that exists, but is not cached
-        Optional<Algorithm> result = helper.find("SampleAlgorithm");
+        List<Algorithm> result = helper.find("Dijkstra");
 
         // Since algorithm exists, the returned value should not be empty. Check result.isPresent()
-        Assertions.assertTrue(result.isPresent());
+        Assertions.assertTrue(!result.isEmpty());
         // Also it should now be cached.
-        Assertions.assertTrue(helper.isCached(result.get().getClass()));
+        Assertions.assertTrue(helper.isCached(result.get(0).getClass()));
     }
 }

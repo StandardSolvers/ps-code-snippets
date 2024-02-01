@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.standardsolvers.pscodesnippets.core.AlgorithmHelper;
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
 
+import java.util.List;
 import java.util.Optional;
 
 public class AlgorithmCompletionContributor extends CompletionContributor {
@@ -32,15 +33,18 @@ public class AlgorithmCompletionContributor extends CompletionContributor {
                         String codeBeforeCaret = codeBeforeCaret(parameters.getEditor());
 
                         if(algorithmHelper.isExists(codeBeforeCaret)){
-                            Algorithm algorithm = algorithmHelper.find(codeBeforeCaret).get();
-                            String replacement = algorithm.getContext();
-                            LookupElement lookupElement = LookupElementBuilder.create(codeBeforeCaret +": "+ replacement)
-                                    .withInsertHandler((context1, item) -> {
-                                        Document document = context1.getDocument();
-                                        document.deleteString(context1.getStartOffset(), context1.getTailOffset()+2);
-                                        document.insertString(context1.getStartOffset(), replacement);
-                                    });
-                            resultSet.addElement(lookupElement);
+                            List<Algorithm> algorithmList = algorithmHelper.find(codeBeforeCaret);
+
+                            algorithmList.forEach(algorithm -> {
+                                String replacement = algorithm.getContext();
+                                LookupElement lookupElement = LookupElementBuilder.create(codeBeforeCaret +": "+ replacement)
+                                        .withInsertHandler((context1, item) -> {
+                                            Document document = context1.getDocument();
+                                            document.deleteString(context1.getStartOffset(), context1.getTailOffset()+2);
+                                            document.insertString(context1.getStartOffset(), replacement);
+                                        });
+                                resultSet.addElement(lookupElement);
+                            });
                         }
                     }
                 }
