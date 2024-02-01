@@ -1,9 +1,8 @@
-package org.standardsolvers.pscodesnippets.solution.dijkstra;
+package org.standardsolvers.pscodesnippets.solution.bfs;
 
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
 
-public class Dijkstra implements Algorithm {
-
+public class BfsAlgorithm implements Algorithm {
     @Override
     public <T> Algorithm set(String key, T value) {
         return this;
@@ -11,7 +10,6 @@ public class Dijkstra implements Algorithm {
 
     @Override
     public String getContext() {
-        return "wow!";
+        return "bfs";
     }
-
 }
