@@ -6,7 +6,7 @@ import org.standardsolvers.pscodesnippets.solution.Algorithm;
 import java.util.List;
 
 public class AlgorithmHelperTest {
-    AlgorithmManager algorithmManager = SimpleAlgorithmManagerImplement.getInstance();
+    AlgorithmManager algorithmManager = AlgorithmManagerImplement.getInstance();
 
     @AfterEach
     void afterEach(){

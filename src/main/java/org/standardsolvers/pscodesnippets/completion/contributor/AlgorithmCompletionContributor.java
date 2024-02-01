@@ -3,12 +3,12 @@ package org.standardsolvers.pscodesnippets.completion.contributor;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.patterns.PlatformPatterns;
 import org.standardsolvers.pscodesnippets.core.AlgorithmManager;
-import org.standardsolvers.pscodesnippets.core.SimpleAlgorithmManagerImplement;
+import org.standardsolvers.pscodesnippets.core.AlgorithmManagerImplement;
 
 public class AlgorithmCompletionContributor extends CompletionContributor {
 
     public AlgorithmCompletionContributor(){
-        AlgorithmManager algorithmManager = SimpleAlgorithmManagerImplement.getInstance();
+        AlgorithmManager algorithmManager = AlgorithmManagerImplement.getInstance();
         extend(CompletionType.BASIC, PlatformPatterns.psiElement(), new AlgorithmCompletionProvider<>(algorithmManager));
     }
 }

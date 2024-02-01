@@ -7,13 +7,13 @@ import org.standardsolvers.pscodesnippets.solution.sample.SampleAlgorithm;
 import java.io.IOException;
 import java.util.*;
 
-public class SimpleAlgorithmManagerImplement implements AlgorithmManager {
+public class AlgorithmManagerImplement implements AlgorithmManager {
 
-    static AlgorithmManager algorithmManager = new SimpleAlgorithmManagerImplement();
+    static AlgorithmManager algorithmManager = new AlgorithmManagerImplement();
     AlgorithmProvider algorithmProvider = new AlgorithmProviderImplement();
     Map<String, List<Algorithm>> algorithmMap = new HashMap<>();
 
-    private SimpleAlgorithmManagerImplement(){}
+    private AlgorithmManagerImplement(){}
     public static AlgorithmManager getInstance() {
         return algorithmManager;
     }
@@ -36,6 +36,7 @@ public class SimpleAlgorithmManagerImplement implements AlgorithmManager {
 
     @Override
     public List<Algorithm> findAll() {
+        // todo
         return List.of(new DijkstraAlgorithm(), new SampleAlgorithm());
     }
 
