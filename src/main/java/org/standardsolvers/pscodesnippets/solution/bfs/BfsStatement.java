@@ -5,7 +5,7 @@ import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BfsSolutionStatement implements SolutionStatement {
+public class BfsStatement implements SolutionStatement {
 
 
     @Override

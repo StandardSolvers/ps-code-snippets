@@ -5,7 +5,7 @@ import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdjacencyListSolutionStatement implements SolutionStatement {
+public class AdjacencyListStatement implements SolutionStatement {
     @Override
     public void solution() {
         ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
