@@ -6,11 +6,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BfsSolutionStatement implements SolutionStatement {
+
+
     @Override
     public void solution() {
         class Point {
             int x, y;
-
             public Point(int x, int y) {
                 this.x = x;
                 this.y = y;
