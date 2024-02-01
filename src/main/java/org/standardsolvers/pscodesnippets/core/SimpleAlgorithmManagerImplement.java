@@ -7,13 +7,13 @@ import java.util.*;
 
 public class SimpleAlgorithmManagerImplement implements AlgorithmManager {
 
-    static AlgorithmManager algorithmHelper = new SimpleAlgorithmManagerImplement();
+    static AlgorithmManager algorithmManager = new SimpleAlgorithmManagerImplement();
     AlgorithmProvider algorithmProvider = new AlgorithmProviderImplement();
     Map<String, List<Algorithm>> algorithmMap = new HashMap<>();
 
     private SimpleAlgorithmManagerImplement(){}
     public static AlgorithmManager getInstance() {
-        return algorithmHelper;
+        return algorithmManager;
     }
 
     @Override

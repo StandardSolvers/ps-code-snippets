@@ -18,18 +18,18 @@ import java.util.List;
 
 public class AlgorithmCompletionProvider<V extends CompletionParameters> extends CompletionProvider<V>{
 
-    final AlgorithmManager algorithmHelper;
+    final AlgorithmManager algorithmManager;
 
-    public AlgorithmCompletionProvider(AlgorithmManager algorithmHelper) {
-        this.algorithmHelper = algorithmHelper;
+    public AlgorithmCompletionProvider(AlgorithmManager algorithmManager) {
+        this.algorithmManager = algorithmManager;
     }
 
     @Override
     protected void addCompletions(@NotNull V parameters, @NotNull ProcessingContext context, @NotNull CompletionResultSet resultSet) {
         String codeBeforeCaret = codeBeforeCaret(parameters.getEditor());
 
-        if(algorithmHelper.isExists(codeBeforeCaret)){
-            List<Algorithm> algorithmList = algorithmHelper.find(codeBeforeCaret);
+        if(algorithmManager.isExists(codeBeforeCaret)){
+            List<Algorithm> algorithmList = algorithmManager.find(codeBeforeCaret);
 
             algorithmList.forEach(algorithm -> {
                 String replacement = algorithm.getContext();
