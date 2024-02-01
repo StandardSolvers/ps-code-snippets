@@ -1,6 +1,8 @@
-package org.standardsolvers.pscodesnippets.solution;
+package org.standardsolvers.pscodesnippets.solution.sample;
 
-public class SampleAlgorithm implements Algorithm{
+import org.standardsolvers.pscodesnippets.solution.Algorithm;
+
+public class SampleAlgorithm implements Algorithm {
     @Override
     public <T> Algorithm set(String key, T value) {
         return this;
