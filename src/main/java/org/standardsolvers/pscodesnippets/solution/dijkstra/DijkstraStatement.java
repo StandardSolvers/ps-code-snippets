@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-public class DijkstraSolutionStatement implements SolutionStatement {
+public class DijkstraStatement implements SolutionStatement {
     @Override
     public void solution() {
         class Node implements Comparable<Node> {

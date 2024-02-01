@@ -2,7 +2,7 @@ package org.standardsolvers.pscodesnippets.solution.disjoint;
 
 import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
 
-public class DisjointSetSolutionStatement implements SolutionStatement {
+public class DisjointSetStatement implements SolutionStatement {
 
 
     void union(int a, int b) {
