@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+  implementation("org.reflections:reflections:0.9.12")
   testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
   testImplementation("org.mockito:mockito-junit-jupiter:3.11.2")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
