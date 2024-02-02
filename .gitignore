@@ -1,5 +1,6 @@
 # Compiled class file
 *.class
+src/main/resources/org/standardsolvers/pscodesnippets/solution/statement/*.java
 
 # Log file
 *.log

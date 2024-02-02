@@ -1,45 +1,28 @@
 package org.standardsolvers.pscodesnippets.core;
 
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
+import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface AlgorithmProvider {
-    default <T  extends Algorithm> List<Algorithm> find(String algorithmName) throws IOException {
-        List<Algorithm> result = new ArrayList<>();
+    Package algorithmPack = Algorithm.class.getPackage();
+    Package statementPack = SolutionStatement.class.getPackage();
 
-        List<String> algorithmFullClassNameList = findFullClassName(algorithmName);
+    AlgorithmProviderImplement initAlgorithmClassMap();
 
-        for (String fullClassName : algorithmFullClassNameList) {
-            try {
-                Class<T> algorithmClass = (Class<T>) Class.forName(fullClassName);
-                Algorithm algorithm = initAlgorithm(algorithmClass).orElseThrow(ClassNotFoundException::new);
-                result.add(algorithm);
+    AlgorithmProviderImplement initSolutionStatementClassMap();
 
-            } catch (ClassNotFoundException ignored) {
-            }
-        }
-        return result;
-    }
+    List<String> findAlgorithmFullClassName(String algorithmName);
 
-    default <T extends Algorithm> Optional<Algorithm> initAlgorithm(Class<T> algorithmClass){
+    List<Algorithm> find(String algorithmName);
 
-        try{
-            Constructor<T> constructor = algorithmClass.getConstructor();
-            T algorithm = constructor.newInstance();
-            return Optional.of(algorithm);
+    Optional<Algorithm> constructAlgorithm(Class<? extends Algorithm> algorithmClass);
 
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                 InvocationTargetException exception){
-            return Optional.empty();
+    Set<Class<? extends Algorithm>> findAllAlgorithmClass();
 
-        }
-    }
-
-    List<String> findFullClassName(String className) throws IOException;
+    List<Class<?>> findAllSolutionStatementClass();
 }

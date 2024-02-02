@@ -1,8 +1,6 @@
 package org.standardsolvers.pscodesnippets.core;
 
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
-import org.standardsolvers.pscodesnippets.solution.dijkstra.DijkstraAlgorithm;
-import org.standardsolvers.pscodesnippets.solution.sample.SampleAlgorithm;
 
 import java.io.IOException;
 import java.util.*;
@@ -23,13 +21,10 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
         if(isCached(algorithmName)){
             return true;
 
-        } else try {
+        } else {
             String algorithmClassName = algorithmName + "Algorithm";
-            List<String> algorithmNameList = algorithmProvider.findFullClassName(algorithmClassName);
+            List<String> algorithmNameList = algorithmProvider.findAlgorithmFullClassName(algorithmClassName);
             return !algorithmNameList.isEmpty();
-
-        } catch (IOException exception) {
-            return false;
 
         }
     }
@@ -37,7 +32,7 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
     @Override
     public List<Algorithm> findAll() {
         // todo
-        return List.of(new DijkstraAlgorithm(), new SampleAlgorithm());
+        return algorithmProvider.find("Dijkstra");
     }
 
     @Override
@@ -47,13 +42,10 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
         if(isCached(algorithmName)){
             return getCached(algorithmName);
 
-        } else try {
+        } else {
             List<Algorithm> result = algorithmProvider.find(algorithmClassName);
             putCache(algorithmName, result);
             return result;
-
-        } catch (IOException exception) {
-            return List.of();
 
         }
     }
