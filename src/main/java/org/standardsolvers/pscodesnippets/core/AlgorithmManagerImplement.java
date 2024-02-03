@@ -2,6 +2,7 @@ package org.standardsolvers.pscodesnippets.core;
 
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
 import org.standardsolvers.pscodesnippets.solution.dijkstra.DijkstraAlgorithm;
+import org.standardsolvers.pscodesnippets.solution.disjoint.DisjointSetAlgorithm;
 import org.standardsolvers.pscodesnippets.solution.sample.SampleAlgorithm;
 
 import java.io.IOException;
@@ -37,7 +38,7 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
     @Override
     public List<Algorithm> findAll() {
         // todo
-        return List.of(new DijkstraAlgorithm(), new SampleAlgorithm());
+        return List.of(new DijkstraAlgorithm(), new SampleAlgorithm(), new DisjointSetAlgorithm());
     }
 
     @Override
