@@ -26,4 +26,14 @@
   <extensions defaultExtensionNs="com.intellij">
     <completion.contributor language="JAVA" implementationClass="org.standardsolvers.pscodesnippets.intellij.completion.contributor.AlgorithmCompletionContributor"/>
   </extensions>
+    <actions>
+        <action id="PopUp" class="org.standardsolvers.pscodesnippets.panel.PsPopUp" text="popup">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt P"/>
+        </action>
+        <action id="ShowPopUp" class="org.standardsolvers.pscodesnippets.panel.ShowPopUpTest" text="show pop up">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt P"/>
+        </action>
+    </actions>
 </idea-plugin>
