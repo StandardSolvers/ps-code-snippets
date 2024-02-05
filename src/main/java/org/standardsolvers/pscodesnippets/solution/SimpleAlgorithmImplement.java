@@ -28,12 +28,13 @@ public class SimpleAlgorithmImplement<T> implements Algorithm<T>{
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
             String content = reader.lines().collect(Collectors.joining("\n"));
-            int start = content.indexOf("{") + 1;
+            int start = content.indexOf("class");
             int end = content.lastIndexOf("}");
-            // check if the indexes are valid
-            if (start >= 0 && end >= 0 && start < end){
-                return content.substring(start, end).trim();
-            } else{
+
+            // Check if the indexes are valid and the word "class" is present
+            if (start >= 0 && end >= 0 && start < end && content.contains("class")) {
+                return content.substring(start, end+1).trim();  // Include the end brace
+            } else {
                 return "";
             }
         } catch (IOException ignored) {

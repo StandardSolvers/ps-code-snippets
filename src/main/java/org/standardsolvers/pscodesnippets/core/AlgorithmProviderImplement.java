@@ -74,6 +74,25 @@ public class AlgorithmProviderImplement implements AlgorithmProvider{
     }
 
     @Override
+    public Map<String, List<Algorithm>> findAll() {
+        Map<String,  List<Algorithm>> result = new HashMap<>();
+
+        List<String> algorithmFullClassNameList =  algorithmClassMap.keySet().stream().toList();
+
+        for (String fullClassName : algorithmFullClassNameList) {
+            try {
+                Class<? extends Algorithm> algorithmClass = algorithmClassMap.get(fullClassName);
+
+                Algorithm algorithm = constructAlgorithm(algorithmClass).orElseThrow(ClassNotFoundException::new);
+                result.put(fullClassName, List.of(algorithm));
+
+            } catch (ClassNotFoundException ignored) {
+            }
+        }
+        return result;
+    }
+
+    @Override
     public Optional<Algorithm> constructAlgorithm(Class<? extends Algorithm> algorithmClass){
 
         try{

@@ -2,7 +2,6 @@ package org.standardsolvers.pscodesnippets.core;
 
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
 
-import java.io.IOException;
 import java.util.*;
 
 public class AlgorithmManagerImplement implements AlgorithmManager {
@@ -11,7 +10,9 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
     AlgorithmProvider algorithmProvider = new AlgorithmProviderImplement();
     Map<String, List<Algorithm>> algorithmMap = new HashMap<>();
 
-    private AlgorithmManagerImplement(){}
+    private AlgorithmManagerImplement(){
+        initAll();
+    }
     public static AlgorithmManager getInstance() {
         return algorithmManager;
     }
@@ -31,9 +32,17 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
 
     @Override
     public List<Algorithm> findAll() {
-        // todo
-        return algorithmProvider.find("Dijkstra");
+        List<Algorithm> result = new ArrayList<>();
+        algorithmMap.values().forEach(result::addAll);
+        return result;
     }
+
+    @Override
+    public void initAll() {
+        Map<String, List<Algorithm>> foundedMap = algorithmProvider.findAll();
+        algorithmMap = foundedMap;
+    }
+
 
     @Override
     public <T  extends Algorithm> List<Algorithm> find(String algorithmName) {
@@ -44,10 +53,37 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
 
         } else {
             List<Algorithm> result = algorithmProvider.find(algorithmClassName);
-            putCache(algorithmName, result);
-            return result;
-
+            if(!result.isEmpty()){
+                putCache(algorithmName, result);
+                return result;
+            }
         }
+
+        // if not returned
+        return getCachedLike(algorithmName);
+    }
+
+
+    @Override
+    public boolean existsCachedLike(String algorithmNameLike){
+        Set<String> algorithmNames = algorithmMap.keySet();
+        for (String name : algorithmNames) {
+            if (name.contains(algorithmNameLike)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
+    public List<Algorithm> getCachedLike(String algorithmNameLike){
+        List<Algorithm> result = new ArrayList<>();
+        Set<String> algorithmNames = algorithmMap.keySet();
+        for (String name : algorithmNames) {
+            if (name.contains(algorithmNameLike)) {
+                result.addAll(algorithmMap.get(name));
+            }
+        }
+        return result;
     }
 
     @Override
