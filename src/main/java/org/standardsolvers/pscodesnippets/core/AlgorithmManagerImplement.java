@@ -45,7 +45,7 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
 
 
     @Override
-    public <T  extends Algorithm> List<Algorithm> find(String algorithmName) {
+    public List<Algorithm> find(String algorithmName) {
         String algorithmClassName = algorithmName + "Algorithm";
 
         if(isCached(algorithmName)){
@@ -92,7 +92,7 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
     }
 
     @Override
-    public <T  extends Algorithm> boolean isCached(String algorithmName){
+    public boolean isCached(String algorithmName){
         return algorithmMap.containsKey(algorithmName);
     }
 

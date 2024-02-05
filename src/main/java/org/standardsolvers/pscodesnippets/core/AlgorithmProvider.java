@@ -14,18 +14,11 @@ public interface AlgorithmProvider {
     Package statementPack = SolutionStatement.class.getPackage();
 
     AlgorithmProviderImplement initAlgorithmClassMap();
-
     AlgorithmProviderImplement initSolutionStatementClassMap();
-
-    List<String> findAlgorithmFullClassName(String algorithmName);
-
     List<Algorithm> find(String algorithmName);
-
     Map<String, List<Algorithm>> findAll();
-
-    Optional<Algorithm> constructAlgorithm(Class<? extends Algorithm> algorithmClass);
-
+    List<String> findAlgorithmFullClassName(String algorithmName);
     Set<Class<? extends Algorithm>> findAllAlgorithmClass();
-
     List<Class<?>> findAllSolutionStatementClass();
+    Optional<Algorithm> constructAlgorithm(Class<? extends Algorithm> algorithmClass);
 }
