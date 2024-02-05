@@ -8,6 +8,7 @@ import org.standardsolvers.pscodesnippets.core.AlgorithmManagerImplement;
 public class AlgorithmCompletionContributor extends CompletionContributor {
 
     public AlgorithmCompletionContributor(){
+
         AlgorithmManager algorithmManager = AlgorithmManagerImplement.getInstance();
         extend(CompletionType.BASIC, PlatformPatterns.psiElement(), new AlgorithmCompletionProvider<>(algorithmManager));
     }
