@@ -27,12 +27,6 @@ intellij {
   ]
 }
 
-tasks.create(name: 'copyToResources', type: Copy) {
-  from 'src/main/java/org/standardsolvers/pscodesnippets/solution/statement'
-  into 'src/main/resources/org/standardsolvers/pscodesnippets/solution/statement'
-}
-build.dependsOn copyToResources
-
 tasks.withType(JavaCompile) {
   sourceCompatibility = "17"
   targetCompatibility = "17"
@@ -62,3 +56,15 @@ publishPlugin {
 test {
   useJUnitPlatform()
 }
+
+tasks.create(name: 'copyToResources', type: Copy) {
+  from 'src/main/java/org/standardsolvers/pscodesnippets/solution/statement'
+  into 'src/main/resources/org/standardsolvers/pscodesnippets/solution/statement'
+}
+processResources.dependsOn copyToResources
+
+
+task cleanCopyToResources(type: Delete) {
+  delete 'src/main/resources/org/standardsolvers/pscodesnippets/solution/statement'
+}
+clean.dependsOn cleanCopyToResources
