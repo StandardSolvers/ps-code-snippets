@@ -59,7 +59,7 @@ public class SampleDialogWrapper extends DialogWrapper {
 
         // Add the JList to the center panel
         centerPanel.add(new JScrollPane(algorithmList), BorderLayout.CENTER);
-
+        algorithmList.setSelectedIndex(0);
         // You can add more components to the centerPanel as neede
 
         return centerPanel;
@@ -67,7 +67,7 @@ public class SampleDialogWrapper extends DialogWrapper {
 
     private void updateAlgorithmList() {
         String searchText = searchTextField.getText().toLowerCase();
-        System.out.println("searchText = @@" + searchText);
+        System.out.println("searchText @  =  " + searchText);
 
         List<String> filteredAlgorithmNames = allAlgorithms.stream()
                 .map(algorithm -> algorithm.getClass().getSimpleName())
@@ -76,7 +76,7 @@ public class SampleDialogWrapper extends DialogWrapper {
 
         String[] array = filteredAlgorithmNames.toArray(new String[0]);
         algorithmList.setListData(array);
-
+        algorithmList.setSelectedIndex(0);
 //        listModel.clear();
 //        for (String algorithmName : filteredAlgorithmNames) {
 //            listModel.addElement(algorithmName);
@@ -96,23 +96,21 @@ public class SampleDialogWrapper extends DialogWrapper {
 
     @Override
     protected void doOKAction() {
-        // Get the search text from the text field
-        String searchText = searchTextField.getText().toLowerCase();
+        System.out.println("ok 버튼 ");
+        int selectedIndex = algorithmList.getSelectedIndex();
 
-        // Filter algorithms based on the search text
-        List<Algorithm> filteredAlgorithms = allAlgorithms.stream()
-                .filter(algorithm -> algorithm.getClass().getSimpleName().toLowerCase().contains(searchText))
-                .collect(Collectors.toList());
+        if (selectedIndex >= 0) {
+            String selectedAlgorithmName = algorithmList.getModel().getElementAt(selectedIndex);
+            // Output the selected algorithm's name
+            System.out.println("Selected Algorithm Name: " + selectedAlgorithmName);
 
-        // Do something with the filtered algorithms (e.g., pass them to another method)
-        // ...
-
-        // Close the dialog
+            // Do something with the selected algorithm (e.g., pass it to another method)
+            // ...
+        } else {
+            // No algorithm selected, handle accordingly
+            System.out.println("No algorithm selected");
+        }
         super.doOKAction();
     }
 
-    public String getSearchText() {
-        // Getter method to retrieve the text from the searchTextField
-        return searchTextField.getText();
-    }
 }
