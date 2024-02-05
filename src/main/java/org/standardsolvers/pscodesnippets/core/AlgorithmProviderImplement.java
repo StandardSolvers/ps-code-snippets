@@ -13,8 +13,8 @@ import java.net.URL;
 import java.util.*;
 
 public class AlgorithmProviderImplement implements AlgorithmProvider{
-    static Map<String, Class<? extends Algorithm>> algorithmClassMap;
-    static Map<Class<? extends Algorithm>, Class<?>> solutionStatementClassMap;
+    Map<String, Class<? extends Algorithm>> algorithmClassMap;
+    Map<String, Class<?>> solutionStatementClassMap;
 
     public AlgorithmProviderImplement(){
         initAlgorithmClassMap();
@@ -33,6 +33,7 @@ public class AlgorithmProviderImplement implements AlgorithmProvider{
 
     @Override
     public AlgorithmProviderImplement initSolutionStatementClassMap(){
+        solutionStatementClassMap = new HashMap<>();
         if(algorithmClassMap.isEmpty()){
             initAlgorithmClassMap();
         }
@@ -43,7 +44,7 @@ public class AlgorithmProviderImplement implements AlgorithmProvider{
                     .filter(clazz->clazz.getAnnotation(SolutionStatement.class).algorithm().equals(algorithmClass))
                     .findFirst().orElse( null);
             if(solutionStatementClass == null) continue;
-            solutionStatementClassMap.put(algorithmClass, solutionStatementClass);
+            solutionStatementClassMap.put(algorithmClass.getName(), solutionStatementClass);
         }
         return this;
     }
@@ -76,7 +77,7 @@ public class AlgorithmProviderImplement implements AlgorithmProvider{
     public Optional<Algorithm> constructAlgorithm(Class<? extends Algorithm> algorithmClass){
 
         try{
-            Class<?> statementClass = solutionStatementClassMap.get(algorithmClass);
+            Class<?> statementClass = solutionStatementClassMap.get(algorithmClass.getName());
             Algorithm algorithm = new SimpleAlgorithmImplement(statementClass);
             return Optional.of(algorithm);
 
