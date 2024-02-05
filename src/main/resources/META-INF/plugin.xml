@@ -33,7 +33,7 @@
         </action>
         <action id="ShowPopUp" class="org.standardsolvers.pscodesnippets.panel.ShowPopUpTest" text="show pop up">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt P"/>
+            <keyboard-shortcut first-keystroke="ctrl shift D" keymap="$default"/>
         </action>
     </actions>
 </idea-plugin>
