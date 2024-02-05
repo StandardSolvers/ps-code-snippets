@@ -97,7 +97,7 @@ public class AlgorithmProviderImplement implements AlgorithmProvider{
 
         try{
             Class<?> statementClass = solutionStatementClassMap.get(algorithmClass.getName());
-            Algorithm algorithm = new SimpleAlgorithmImplement(statementClass);
+            Algorithm<?> algorithm = SimpleAlgorithmImplement.createInstance(algorithmClass.getName(), statementClass);
             return Optional.of(algorithm);
 
         } catch (Exception exception){

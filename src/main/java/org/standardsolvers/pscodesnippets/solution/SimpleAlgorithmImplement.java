@@ -5,12 +5,23 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 public class SimpleAlgorithmImplement<T> implements Algorithm<T>{
+    final String algorithmName;
     final Class<T> statementClass;
     final String statementString;
 
-    public SimpleAlgorithmImplement(Class<T> statementClass){
+    private SimpleAlgorithmImplement(String algorithmName, Class<T> statementClass){
         this.statementClass = statementClass;
         this.statementString = findBody(statementClass);
+        this.algorithmName = algorithmName;
+    }
+
+    public static <T> Algorithm<T> createInstance(String algorithmName, Class<T> statementClass){
+        return new SimpleAlgorithmImplement<>(algorithmName, statementClass);
+    }
+
+    @Override
+    public String getName() {
+        return algorithmName;
     }
 
     @Override
