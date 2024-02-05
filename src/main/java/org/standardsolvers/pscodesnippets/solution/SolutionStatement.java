@@ -1,6 +1,10 @@
 package org.standardsolvers.pscodesnippets.solution;
 
-public interface SolutionStatement {
+import java.lang.annotation.*;
 
-    void solution();
+@Documented
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface  SolutionStatement {
+    Class<? extends Algorithm> algorithm();
 }

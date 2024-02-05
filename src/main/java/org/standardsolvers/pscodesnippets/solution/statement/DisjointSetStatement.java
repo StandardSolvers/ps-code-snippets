@@ -1,10 +1,10 @@
-package org.standardsolvers.pscodesnippets.solution.disjoint;
+package org.standardsolvers.pscodesnippets.solution.statement;
 
 import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
+import org.standardsolvers.pscodesnippets.solution.algorithm.DisjointSetAlgorithm;
 
-public class DisjointSetStatement implements SolutionStatement {
-
-
+@SolutionStatement(algorithm = DisjointSetAlgorithm.class)
+public class DisjointSetStatement {
     void union(int a, int b) {
         a = find(a);
         b = find(b);
@@ -17,9 +17,5 @@ public class DisjointSetStatement implements SolutionStatement {
             return num;
         }
         return parent[num] = find(parent[num]);
-    }
-    @Override
-    public void solution() {
-
     }
 }

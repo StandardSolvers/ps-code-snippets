@@ -1,4 +1,4 @@
-package org.standardsolvers.pscodesnippets.completion.contributor;
+package org.standardsolvers.pscodesnippets.intellij.completion.contributor;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
@@ -28,7 +28,7 @@ public class AlgorithmCompletionProvider<V extends CompletionParameters> extends
     protected void addCompletions(@NotNull V parameters, @NotNull ProcessingContext context, @NotNull CompletionResultSet resultSet) {
         String codeBeforeCaret = codeBeforeCaret(parameters.getEditor());
 
-        if(algorithmManager.isExists(codeBeforeCaret)){
+        if(algorithmManager.isExists(codeBeforeCaret) || algorithmManager.existsCachedLike(codeBeforeCaret)){
             List<Algorithm> algorithmList = algorithmManager.find(codeBeforeCaret);
 
             algorithmList.forEach(algorithm -> {
