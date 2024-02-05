@@ -1,4 +1,4 @@
-package org.standardsolvers.pscodesnippets.completion.contributor;
+package org.standardsolvers.pscodesnippets.intellij.completion.contributor;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;

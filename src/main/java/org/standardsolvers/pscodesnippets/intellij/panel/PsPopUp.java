@@ -1,9 +1,9 @@
-package org.standardsolvers.pscodesnippets.panel;
+package org.standardsolvers.pscodesnippets.intellij.panel;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
-public class ShowPopUpTest extends AnAction {
+public class PsPopUp extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
