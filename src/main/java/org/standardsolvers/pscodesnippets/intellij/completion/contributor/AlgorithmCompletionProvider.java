@@ -29,6 +29,7 @@ public class AlgorithmCompletionProvider<V extends CompletionParameters> extends
         String codeBeforeCaret = codeBeforeCaret(parameters.getEditor());
 
         if(algorithmManager.isExists(codeBeforeCaret) || algorithmManager.existsCachedLike(codeBeforeCaret)){
+          
             List<Algorithm> algorithmList = algorithmManager.find(codeBeforeCaret);
 
             algorithmList.forEach(algorithm -> {
