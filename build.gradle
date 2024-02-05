@@ -1,0 +1,70 @@
+plugins {
+  id "java"
+  id "org.jetbrains.kotlin.jvm" version "1.9.21"
+  id "org.jetbrains.intellij" version "1.16.1"
+}
+
+group = "org.standardsolvers"
+version = "1.0-SNAPSHOT"
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation "org.reflections:reflections:0.9.12"
+  testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.0"
+  testImplementation "org.mockito:mockito-junit-jupiter:3.11.2"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.0"
+}
+
+intellij {
+  version = "2023.1.5"
+  type = "IC"
+
+  plugins = [
+          // Plugin Dependencies
+  ]
+}
+
+tasks.withType(JavaCompile) {
+  sourceCompatibility = "17"
+  targetCompatibility = "17"
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile.class) {
+  kotlinOptions {
+    jvmTarget = "17"
+  }
+}
+
+patchPluginXml {
+  sinceBuild = '231'
+  untilBuild = '241.*'
+}
+
+signPlugin {
+  certificateChain = System.getenv("CERTIFICATE_CHAIN")
+  privateKey = System.getenv("PRIVATE_KEY")
+  password = System.getenv("PRIVATE_KEY_PASSWORD")
+}
+
+publishPlugin {
+  token = System.getenv("PUBLISH_TOKEN")
+}
+
+test {
+  useJUnitPlatform()
+}
+
+tasks.create(name: 'copyToResources', type: Copy) {
+  from 'src/main/java/org/standardsolvers/pscodesnippets/solution/statement'
+  into 'src/main/resources/org/standardsolvers/pscodesnippets/solution/statement'
+}
+processResources.dependsOn copyToResources
+
+
+task cleanCopyToResources(type: Delete) {
+  delete 'src/main/resources/org/standardsolvers/pscodesnippets/solution/statement'
+}
+clean.dependsOn cleanCopyToResources

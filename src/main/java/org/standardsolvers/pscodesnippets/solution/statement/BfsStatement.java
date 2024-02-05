@@ -1,14 +1,14 @@
-package org.standardsolvers.pscodesnippets.solution.bfs;
+package org.standardsolvers.pscodesnippets.solution.statement;
 
 import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
+import org.standardsolvers.pscodesnippets.solution.algorithm.BfsAlgorithm;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BfsStatement implements SolutionStatement {
+@SolutionStatement(algorithm = BfsAlgorithm.class)
+public class BfsStatement {
 
-
-    @Override
     public void solution() {
         class Point {
             int x, y;

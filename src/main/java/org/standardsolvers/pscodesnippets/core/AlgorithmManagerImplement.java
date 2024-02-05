@@ -1,11 +1,7 @@
 package org.standardsolvers.pscodesnippets.core;
 
 import org.standardsolvers.pscodesnippets.solution.Algorithm;
-import org.standardsolvers.pscodesnippets.solution.dijkstra.DijkstraAlgorithm;
-import org.standardsolvers.pscodesnippets.solution.disjoint.DisjointSetAlgorithm;
-import org.standardsolvers.pscodesnippets.solution.sample.SampleAlgorithm;
 
-import java.io.IOException;
 import java.util.*;
 
 public class AlgorithmManagerImplement implements AlgorithmManager {
@@ -14,7 +10,9 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
     AlgorithmProvider algorithmProvider = new AlgorithmProviderImplement();
     Map<String, List<Algorithm>> algorithmMap = new HashMap<>();
 
-    private AlgorithmManagerImplement(){}
+    private AlgorithmManagerImplement(){
+        initAll();
+    }
     public static AlgorithmManager getInstance() {
         return algorithmManager;
     }
@@ -24,39 +22,68 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
         if(isCached(algorithmName)){
             return true;
 
-        } else try {
+        } else {
             String algorithmClassName = algorithmName + "Algorithm";
-            List<String> algorithmNameList = algorithmProvider.findFullClassName(algorithmClassName);
+            List<String> algorithmNameList = algorithmProvider.findAlgorithmFullClassName(algorithmClassName);
             return !algorithmNameList.isEmpty();
-
-        } catch (IOException exception) {
-            return false;
 
         }
     }
 
     @Override
     public List<Algorithm> findAll() {
-        // todo
-        return List.of(new DijkstraAlgorithm(), new SampleAlgorithm(), new DisjointSetAlgorithm());
+        List<Algorithm> result = new ArrayList<>();
+        algorithmMap.values().forEach(result::addAll);
+        return result;
     }
 
     @Override
-    public <T  extends Algorithm> List<Algorithm> find(String algorithmName) {
+    public void initAll() {
+        Map<String, List<Algorithm>> foundedMap = algorithmProvider.findAll();
+        algorithmMap = foundedMap;
+    }
+
+
+    @Override
+    public List<Algorithm> find(String algorithmName) {
         String algorithmClassName = algorithmName + "Algorithm";
 
         if(isCached(algorithmName)){
             return getCached(algorithmName);
 
-        } else try {
+        } else {
             List<Algorithm> result = algorithmProvider.find(algorithmClassName);
-            putCache(algorithmName, result);
-            return result;
-
-        } catch (IOException exception) {
-            return List.of();
-
+            if(!result.isEmpty()){
+                putCache(algorithmName, result);
+                return result;
+            }
         }
+
+        // if not returned
+        return getCachedLike(algorithmName);
+    }
+
+
+    @Override
+    public boolean existsCachedLike(String algorithmNameLike){
+        Set<String> algorithmNames = algorithmMap.keySet();
+        for (String name : algorithmNames) {
+            if (name.contains(algorithmNameLike)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
+    public List<Algorithm> getCachedLike(String algorithmNameLike){
+        List<Algorithm> result = new ArrayList<>();
+        Set<String> algorithmNames = algorithmMap.keySet();
+        for (String name : algorithmNames) {
+            if (name.contains(algorithmNameLike)) {
+                result.addAll(algorithmMap.get(name));
+            }
+        }
+        return result;
     }
 
     @Override
@@ -65,7 +92,7 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
     }
 
     @Override
-    public <T  extends Algorithm> boolean isCached(String algorithmName){
+    public boolean isCached(String algorithmName){
         return algorithmMap.containsKey(algorithmName);
     }
 
