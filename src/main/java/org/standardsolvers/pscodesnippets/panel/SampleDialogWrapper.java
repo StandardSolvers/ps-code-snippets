@@ -38,7 +38,6 @@ public class SampleDialogWrapper extends DialogWrapper {
         algorithmList = new JList<>();
         algorithmList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-
         searchTextField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -68,11 +67,15 @@ public class SampleDialogWrapper extends DialogWrapper {
 
     private void updateAlgorithmList() {
         String searchText = searchTextField.getText().toLowerCase();
+        System.out.println("searchText = @@" + searchText);
 
         List<String> filteredAlgorithmNames = allAlgorithms.stream()
                 .map(algorithm -> algorithm.getClass().getSimpleName())
                 .filter(className -> className.toLowerCase().contains(searchText))
-                .collect(Collectors.toList());
+                .toList();
+
+        String[] array = filteredAlgorithmNames.toArray(new String[0]);
+        algorithmList.setListData(array);
 
 //        listModel.clear();
 //        for (String algorithmName : filteredAlgorithmNames) {
@@ -81,8 +84,14 @@ public class SampleDialogWrapper extends DialogWrapper {
     }
 
     private void refreshAlgorithmList() {
+        AlgorithmManager algorithmManager = AlgorithmManagerImplement.getInstance();
         allAlgorithms = algorithmManager.findAll();
-        updateAlgorithmList();
+        List<String> classNames = allAlgorithms.stream()
+                .map(algorithm -> algorithm.getClass().getSimpleName())
+                .toList();
+
+        String[] array = classNames.toArray(new String[0]);
+        algorithmList.setListData(array);
     }
 
     @Override
