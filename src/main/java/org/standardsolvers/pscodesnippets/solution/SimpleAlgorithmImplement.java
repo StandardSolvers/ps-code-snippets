@@ -28,7 +28,7 @@ public class SimpleAlgorithmImplement<T> implements Algorithm<T>{
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
             String content = reader.lines().collect(Collectors.joining("\n"));
-            int start = content.indexOf("class");
+            int start = content.indexOf("public class");
             int end = content.lastIndexOf("}");
 
             // Check if the indexes are valid and the word "class" is present
