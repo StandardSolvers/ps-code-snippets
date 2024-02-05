@@ -87,7 +87,7 @@ public class SampleDialogWrapper extends DialogWrapper {
         AlgorithmManager algorithmManager = AlgorithmManagerImplement.getInstance();
         allAlgorithms = algorithmManager.findAll();
         List<String> classNames = allAlgorithms.stream()
-                .map(algorithm -> algorithm.getClass().getSimpleName())
+                .map(Algorithm::getName)
                 .toList();
 
         String[] array = classNames.toArray(new String[0]);
