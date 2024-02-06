@@ -31,8 +31,7 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
 
     @Override
     public void initAll() {
-        Map<String, List<Algorithm>> foundedMap = algorithmProvider.findAll();
-        algorithmMap = foundedMap;
+        algorithmMap = algorithmProvider.findAll();
     }
 
 
