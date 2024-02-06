@@ -90,8 +90,17 @@ public class SampleDialogWrapper extends DialogWrapper {
                 .map(Algorithm::getName)
                 .toList();
 
+//        List<String> classNames = allAlgorithms.stream()
+//                .map(algorithm -> algorithm.getClass().getSimpleName())
+//                .toList();
+
         String[] array = classNames.toArray(new String[0]);
+        algorithmList.setSelectedIndex(0);
         algorithmList.setListData(array);
+        SwingUtilities.invokeLater(() -> {
+            algorithmList.requestFocusInWindow(); // Focus on the JList after the event queue is processed
+            algorithmList.requestFocus(); // Alternative way to focus on the JList
+        });
     }
 
     @Override
