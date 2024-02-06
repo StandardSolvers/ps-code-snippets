@@ -19,15 +19,7 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
 
     @Override
     public boolean isExists(String algorithmName){
-        if(isCached(algorithmName)){
-            return true;
-
-        } else {
-            String algorithmClassName = algorithmName + "Algorithm";
-            List<String> algorithmNameList = algorithmProvider.findAlgorithmFullClassName(algorithmClassName);
-            return !algorithmNameList.isEmpty();
-
-        }
+        return isCached(algorithmName);
     }
 
     @Override
@@ -46,17 +38,9 @@ public class AlgorithmManagerImplement implements AlgorithmManager {
 
     @Override
     public List<Algorithm> find(String algorithmName) {
-        String algorithmClassName = algorithmName + "Algorithm";
 
         if(isCached(algorithmName)){
             return getCached(algorithmName);
-
-        } else {
-            List<Algorithm> result = algorithmProvider.find(algorithmClassName);
-            if(!result.isEmpty()){
-                putCache(algorithmName, result);
-                return result;
-            }
         }
 
         // if not returned
