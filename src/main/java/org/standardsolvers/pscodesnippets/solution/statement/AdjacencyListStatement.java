@@ -1,7 +1,7 @@
 package org.standardsolvers.pscodesnippets.solution.statement;
 
 import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
-import org.standardsolvers.pscodesnippets.solution.algorithm.AdjacencyListAlgorithm;
+import org.standardsolvers.pscodesnippets.solution.ps.AdjacencyListAlgorithm;
 
 import java.util.ArrayList;
 import java.util.Scanner;

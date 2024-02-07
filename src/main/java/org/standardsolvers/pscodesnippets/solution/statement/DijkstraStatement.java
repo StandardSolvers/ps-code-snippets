@@ -2,7 +2,7 @@ package org.standardsolvers.pscodesnippets.solution.statement;
 
 import org.jetbrains.annotations.NotNull;
 import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
-import org.standardsolvers.pscodesnippets.solution.algorithm.DijkstraAlgorithm;
+import org.standardsolvers.pscodesnippets.solution.ps.DijkstraAlgorithm;
 
 import java.util.ArrayList;
 import java.util.Arrays;

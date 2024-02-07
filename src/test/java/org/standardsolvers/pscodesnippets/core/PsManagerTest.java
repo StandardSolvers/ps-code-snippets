@@ -2,7 +2,7 @@ package org.standardsolvers.pscodesnippets.core;
 
 import org.junit.jupiter.api.*;
 import org.standardsolvers.pscodesnippets.solution.Ps;
-import org.standardsolvers.pscodesnippets.solution.algorithm.SampleAlgorithm;
+import org.standardsolvers.pscodesnippets.solution.ps.SampleAlgorithm;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package org.standardsolvers.pscodesnippets.solution.statement;
 
 import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
-import org.standardsolvers.pscodesnippets.solution.algorithm.DisjointSetAlgorithm;
+import org.standardsolvers.pscodesnippets.solution.ps.DisjointSetAlgorithm;
 
 @SolutionStatement(ps = DisjointSetAlgorithm.class)
 public class DisjointSetStatement {
