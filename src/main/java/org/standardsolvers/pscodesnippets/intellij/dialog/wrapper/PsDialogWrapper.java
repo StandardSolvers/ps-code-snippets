@@ -27,7 +27,7 @@ public class PsDialogWrapper extends DialogWrapper {
     AlgorithmManager algorithmManager = AlgorithmManagerImplement.getInstance();
     private List<Algorithm> allAlgorithms;
     private DefaultListModel<String> listModel;
-    protected PsDialogWrapper() {
+    public PsDialogWrapper() {
         super(true);
         setTitle("PS 코드 목록");
         init();
