@@ -1,12 +1,12 @@
 package org.standardsolvers.pscodesnippets.solution.statement;
 
 import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
-import org.standardsolvers.pscodesnippets.solution.algorithm.BfsAlgorithm;
+import org.standardsolvers.pscodesnippets.solution.ps.BfsAlgorithm;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-@SolutionStatement(algorithm = BfsAlgorithm.class)
+@SolutionStatement(ps = BfsAlgorithm.class)
 public class BfsStatement {
 
     public void solution() {

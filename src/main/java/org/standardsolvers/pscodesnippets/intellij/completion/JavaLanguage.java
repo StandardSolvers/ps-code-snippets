@@ -1,4 +1,4 @@
-package org.standardsolvers.pscodesnippets.intellij.completion.contributor;
+package org.standardsolvers.pscodesnippets.intellij.completion;
 
 import com.intellij.lang.Language;
 

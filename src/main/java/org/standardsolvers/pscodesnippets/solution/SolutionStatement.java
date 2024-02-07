@@ -6,5 +6,5 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface  SolutionStatement {
-    Class<? extends Algorithm> algorithm();
+    Class<? extends Ps> ps();
 }

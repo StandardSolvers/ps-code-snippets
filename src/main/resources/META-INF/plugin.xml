@@ -24,7 +24,7 @@
   <!-- Extension points defined by the plugin.
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
   <extensions defaultExtensionNs="com.intellij">
-    <completion.contributor language="JAVA" implementationClass="org.standardsolvers.pscodesnippets.intellij.completion.contributor.AlgorithmCompletionContributor"/>
+    <completion.contributor language="JAVA" implementationClass="org.standardsolvers.pscodesnippets.intellij.completion.PsCompletionContributor"/>
   </extensions>
     <actions>
         <action id="ShowPopUp" class="org.standardsolvers.pscodesnippets.intellij.editor.popup.menu.PsPopUp" text="PS List">

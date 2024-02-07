@@ -1,4 +1,4 @@
-package org.standardsolvers.pscodesnippets.intellij.completion.contributor;
+package org.standardsolvers.pscodesnippets.intellij.completion;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
@@ -11,29 +11,29 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.util.ProcessingContext;
 import org.jetbrains.annotations.NotNull;
-import org.standardsolvers.pscodesnippets.core.AlgorithmManager;
-import org.standardsolvers.pscodesnippets.solution.Algorithm;
+import org.standardsolvers.pscodesnippets.core.PsManager;
+import org.standardsolvers.pscodesnippets.solution.Ps;
 
 import java.util.List;
 
-public class AlgorithmCompletionProvider<V extends CompletionParameters> extends CompletionProvider<V>{
+public class PsCompletionProvider<V extends CompletionParameters> extends CompletionProvider<V>{
 
-    final AlgorithmManager algorithmManager;
+    final PsManager psManager;
 
-    public AlgorithmCompletionProvider(AlgorithmManager algorithmManager) {
-        this.algorithmManager = algorithmManager;
+    public PsCompletionProvider(PsManager psManager) {
+        this.psManager = psManager;
     }
 
     @Override
     protected void addCompletions(@NotNull V parameters, @NotNull ProcessingContext context, @NotNull CompletionResultSet resultSet) {
         String codeBeforeCaret = codeBeforeCaret(parameters.getEditor());
 
-        if(algorithmManager.isExists(codeBeforeCaret) || algorithmManager.existsCachedLike(codeBeforeCaret)){
+        if(psManager.isExists(codeBeforeCaret) || psManager.existsCachedLike(codeBeforeCaret)){
           
-            List<Algorithm> algorithmList = algorithmManager.find(codeBeforeCaret);
+            List<Ps> psList = psManager.find(codeBeforeCaret);
 
-            algorithmList.forEach(algorithm -> {
-                String replacement = algorithm.getContext();
+            psList.forEach(ps -> {
+                String replacement = ps.getContext();
                 LookupElement lookupElement = LookupElementBuilder.create(codeBeforeCaret +": "+ replacement)
                         .withInsertHandler((context1, item) -> {
                             Document document = context1.getDocument();
