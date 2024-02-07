@@ -1,14 +1,15 @@
-package org.standardsolvers.pscodesnippets.intellij.panel;
+package org.standardsolvers.pscodesnippets.intellij.editor.popup.menu;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import org.standardsolvers.pscodesnippets.intellij.dialog.wrapper.PsDialogWrapper;
 
 public class PsPopUp extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
         // TODO: insert action logic here
-        SampleDialogWrapper dialog = new SampleDialogWrapper();
+        PsDialogWrapper dialog = new PsDialogWrapper();
         dialog.show();
     }
 }
