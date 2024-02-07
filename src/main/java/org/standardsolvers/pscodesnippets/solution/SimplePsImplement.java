@@ -4,24 +4,24 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
-public class SimpleAlgorithmImplement<T> implements Algorithm<T>{
-    final String algorithmName;
+public class SimplePsImplement<T> implements Ps<T> {
+    final String psName;
     final Class<T> statementClass;
     final String statementString;
 
-    private SimpleAlgorithmImplement(String algorithmName, Class<T> statementClass){
+    private SimplePsImplement(String psName, Class<T> statementClass){
         this.statementClass = statementClass;
         this.statementString = findBody(statementClass);
-        this.algorithmName = algorithmName;
+        this.psName = psName;
     }
 
-    public static <T> Algorithm<T> createInstance(String algorithmName, Class<T> statementClass){
-        return new SimpleAlgorithmImplement<>(algorithmName, statementClass);
+    public static <T> Ps<T> createInstance(String psName, Class<T> statementClass){
+        return new SimplePsImplement<>(psName, statementClass);
     }
 
     @Override
     public String getName() {
-        return algorithmName;
+        return psName;
     }
 
     @Override

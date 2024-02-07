@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-@SolutionStatement(algorithm = AdjacencyListAlgorithm.class)
+@SolutionStatement(ps = AdjacencyListAlgorithm.class)
 public class AdjacencyListStatement {
     public void solution() {
         ArrayList<ArrayList<Integer>> graph = new ArrayList<>();

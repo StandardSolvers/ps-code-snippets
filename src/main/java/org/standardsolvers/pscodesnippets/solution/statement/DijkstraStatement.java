@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
-@SolutionStatement(algorithm = DijkstraAlgorithm.class)
+@SolutionStatement(ps = DijkstraAlgorithm.class)
 public class DijkstraStatement {
 
     public void solution() {

@@ -6,7 +6,7 @@ import org.standardsolvers.pscodesnippets.solution.algorithm.BfsAlgorithm;
 import java.util.LinkedList;
 import java.util.Queue;
 
-@SolutionStatement(algorithm = BfsAlgorithm.class)
+@SolutionStatement(ps = BfsAlgorithm.class)
 public class BfsStatement {
 
     public void solution() {

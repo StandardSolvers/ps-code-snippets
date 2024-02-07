@@ -2,23 +2,22 @@ package org.standardsolvers.pscodesnippets.intellij.panel;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.Nullable;
-import org.standardsolvers.pscodesnippets.core.AlgorithmManager;
-import org.standardsolvers.pscodesnippets.core.AlgorithmManagerImplement;
-import org.standardsolvers.pscodesnippets.solution.Algorithm;
+import org.standardsolvers.pscodesnippets.core.PsManager;
+import org.standardsolvers.pscodesnippets.core.PsManagerImplement;
+import org.standardsolvers.pscodesnippets.solution.Ps;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SampleDialogWrapper extends DialogWrapper {
 
     private JTextField searchTextField;
     private JList<String> algorithmList;
-    AlgorithmManager algorithmManager = AlgorithmManagerImplement.getInstance();
-    private List<Algorithm> allAlgorithms;
+    PsManager algorithmManager = PsManagerImplement.getInstance();
+    private List<Ps> allAlgorithms;
     private DefaultListModel<String> listModel;
     protected SampleDialogWrapper() {
         super(true);
@@ -84,10 +83,10 @@ public class SampleDialogWrapper extends DialogWrapper {
     }
 
     private void refreshAlgorithmList() {
-        AlgorithmManager algorithmManager = AlgorithmManagerImplement.getInstance();
+        PsManager algorithmManager = PsManagerImplement.getInstance();
         allAlgorithms = algorithmManager.findAll();
         List<String> classNames = allAlgorithms.stream()
-                .map(Algorithm::getName)
+                .map(Ps::getName)
                 .toList();
 
         String[] array = classNames.toArray(new String[0]);
