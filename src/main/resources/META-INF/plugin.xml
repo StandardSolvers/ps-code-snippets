@@ -27,13 +27,9 @@
     <completion.contributor language="JAVA" implementationClass="org.standardsolvers.pscodesnippets.intellij.completion.PsCompletionContributor"/>
   </extensions>
     <actions>
-        <action id="ShowPopUp" class="org.standardsolvers.pscodesnippets.intellij.editor.popup.menu.PsPopUp" text="PS List">
+        <action id="ShowPopUp" class="org.standardsolvers.pscodesnippets.intellij.action.PsPopUp" text="PS List">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <keyboard-shortcut first-keystroke="ctrl shift D" keymap="$default"/>
-        </action>
-        <action id="ExamplePopup" class="org.standardsolvers.pscodesnippets.intellij.editor.popup.menu.ExamplePopUp"
-                text="클래스 목록 보여주기">
-            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl Z"/>
         </action>
     </actions>
 </idea-plugin>

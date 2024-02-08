@@ -1,4 +1,4 @@
-package org.standardsolvers.pscodesnippets.intellij.dialog.wrapper;
+package org.standardsolvers.pscodesnippets.intellij.dialog;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.Nullable;
