@@ -31,5 +31,9 @@
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <keyboard-shortcut first-keystroke="ctrl shift D" keymap="$default"/>
         </action>
+        <action id="ExamplePopup" class="org.standardsolvers.pscodesnippets.intellij.editor.popup.menu.ExamplePopUp"
+                text="클래스 목록 보여주기">
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl Z"/>
+        </action>
     </actions>
 </idea-plugin>
