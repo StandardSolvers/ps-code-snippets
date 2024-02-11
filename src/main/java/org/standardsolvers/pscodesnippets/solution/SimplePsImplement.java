@@ -5,24 +5,32 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 public class SimplePsImplement<T> implements Ps<T> {
-    final String psName;
+    final String name;
+    final String simpleName;
     final Class<T> statementClass;
     final String statementString;
 
-    private SimplePsImplement(String psName, Class<T> statementClass){
+    private SimplePsImplement(String name, String simpleName, Class<T> statementClass){
         this.statementClass = statementClass;
         this.statementString = findBody(statementClass);
-        this.psName = psName;
+        this.name = name;
+        this.simpleName = simpleName;
     }
 
-    public static <T> Ps<T> createInstance(String psName, Class<T> statementClass){
-        return new SimplePsImplement<>(psName, statementClass);
+    public static <T> Ps<T> createInstance(String name, String simpleName, Class<T> statementClass){
+        return new SimplePsImplement<>(name, simpleName, statementClass);
     }
 
     @Override
     public String getName() {
-        return psName;
+        return this.name;
     }
+
+    @Override
+    public String getSimpleName() {
+        return this.simpleName;
+    }
+
 
     @Override
     public String getContext(){

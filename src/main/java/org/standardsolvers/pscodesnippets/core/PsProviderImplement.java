@@ -97,7 +97,7 @@ public class PsProviderImplement implements PsProvider {
 
         try{
             Class<?> statementClass = solutionStatementClassMap.get(psClass.getName());
-            Ps<?> ps = SimplePsImplement.createInstance(psClass.getName(), statementClass);
+            Ps<?> ps = SimplePsImplement.createInstance(psClass.getName(), psClass.getSimpleName(), statementClass);
             return Optional.of(ps);
 
         } catch (Exception exception){
