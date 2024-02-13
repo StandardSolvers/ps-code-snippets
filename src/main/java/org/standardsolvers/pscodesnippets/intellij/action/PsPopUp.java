@@ -15,11 +15,14 @@ public class PsPopUp extends AnAction {
         PsDialogWrapper dialog = new PsDialogWrapper();
         dialog.show();
         String context = dialog.getContext();
-        Project project = e.getProject();
-        Editor editor = (Editor) e.getDataContext().getData("editor");
-        int offset = editor.getCaretModel().getOffset();
-        WriteCommandAction.runWriteCommandAction(project, () -> {
-            editor.getDocument().insertString(offset, context);
-        });
+        System.out.println("context = " + context);
+        if (context != null) { //
+            Project project = e.getProject();
+            Editor editor = (Editor) e.getDataContext().getData("editor");
+            int offset = editor.getCaretModel().getOffset();
+            WriteCommandAction.runWriteCommandAction(project, () -> {
+                editor.getDocument().insertString(offset, context);
+            });
+        }
     }
 }

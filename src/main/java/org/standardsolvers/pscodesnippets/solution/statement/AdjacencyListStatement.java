@@ -1,13 +1,13 @@
 package org.standardsolvers.pscodesnippets.solution.statement;
 
 import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
-import org.standardsolvers.pscodesnippets.solution.ps.AdjacencyListAlgorithm;
+import org.standardsolvers.pscodesnippets.solution.ps.AdjacencyList;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
-@SolutionStatement(ps = AdjacencyListAlgorithm.class)
+@SolutionStatement(ps = AdjacencyList.class)
 public class AdjacencyListStatement {
     public void solution() {
         ArrayList<ArrayList<Integer>> graph = new ArrayList<>();

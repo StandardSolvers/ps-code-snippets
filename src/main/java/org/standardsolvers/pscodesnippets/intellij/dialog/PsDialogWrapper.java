@@ -16,16 +16,13 @@ public class PsDialogWrapper extends DialogWrapper {
 
     private JTextField searchTextField;
     private JList<String> psList;
-    PsManager psManager = PsManagerImplement.getInstance();
     private List<Ps> allPss;
     private String context;
-    // 다른 코드들
 
     public void setContext(String context) {
         this.context = context;
     }
 
-    // 선택된 PS의 컨텍스트를 반환하는 메서드
     public String getContext() {
         return context;
     }
@@ -37,13 +34,9 @@ public class PsDialogWrapper extends DialogWrapper {
 
     @Override
     protected @Nullable JComponent createCenterPanel() {
-        // Create a panel with BorderLayout
         JPanel centerPanel = new JPanel(new BorderLayout());
-
-        // Create a search text field
         searchTextField = new JTextField();
         centerPanel.add(searchTextField, BorderLayout.NORTH);
-
         psList = new JList<>();
         psList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
@@ -63,21 +56,18 @@ public class PsDialogWrapper extends DialogWrapper {
                 // Plain text components do not fire these events
             }
         });
-        // Fetch and display the ps names
         refreshPsList();
-
-
         centerPanel.add(new JScrollPane(psList), BorderLayout.CENTER);
         psList.setSelectedIndex(0);
-
-
+        SwingUtilities.invokeLater(() -> {
+            psList.requestFocusInWindow();
+            psList.requestFocus();
+        });
         return centerPanel;
     }
 
     private void updatePsList() {
         String searchText = searchTextField.getText().toLowerCase();
-        System.out.println("searchText @  =  " + searchText);
-
         List<String> filteredPsNames = allPss.stream()
                 .map(Ps::getName)
                 .filter(className -> className.toLowerCase().contains(searchText))
@@ -86,23 +76,19 @@ public class PsDialogWrapper extends DialogWrapper {
         String[] array = filteredPsNames.toArray(new String[0]);
         psList.setListData(array);
         psList.setSelectedIndex(0);
-//
+
     }
 
     private void refreshPsList() {
         PsManager psManager = PsManagerImplement.getInstance();
         allPss = psManager.findAll();
         List<String> classNames = allPss.stream()
-                .map(Ps::getName)
+                .map(Ps::getSimpleName)
                 .toList();
 
         String[] array = classNames.toArray(new String[0]);
         psList.setSelectedIndex(0);
         psList.setListData(array);
-        SwingUtilities.invokeLater(() -> {
-            psList.requestFocusInWindow();
-            psList.requestFocus();
-        });
     }
 
 
@@ -116,7 +102,6 @@ public class PsDialogWrapper extends DialogWrapper {
             String context = selectedPs.getContext();
             setContext(context);
         } else {
-            // No ps selected, handle accordingly
             System.out.println("No ps selected");
         }
         super.doOKAction();

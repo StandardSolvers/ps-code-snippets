@@ -1,9 +1,9 @@
 package org.standardsolvers.pscodesnippets.solution.statement;
 
 import org.standardsolvers.pscodesnippets.solution.SolutionStatement;
-import org.standardsolvers.pscodesnippets.solution.ps.DisjointSetAlgorithm;
+import org.standardsolvers.pscodesnippets.solution.ps.DisjointSet;
 
-@SolutionStatement(ps = DisjointSetAlgorithm.class)
+@SolutionStatement(ps = DisjointSet.class)
 public class DisjointSetStatement {
     void union(int a, int b) {
         a = find(a);
