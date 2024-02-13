@@ -21,9 +21,7 @@
     - Work on new Algorithm (Ps, Statement pair set)
     - Work on documentation
 - To ensure equal and positive communication, we adhere to our [Code of Conduct](./CODE_OF_CONDUCT.md). Before starting any interactions with this repository, please read it and make sure to follow.
-- Please before contributing check out our [Contributing Guide](./CONTRIBUTING.md) and issues labeled "good first issue":
-
-[![GitHub issues by-label](https://img.shields.io/github/issues/StandardSolvers/ps-code-snippets/good%20first%20issue?style=for-the-badge)](https://github.com/StandardSolvers/ps-code-snippets/contribute)
+- Please before contributing check out our [Contributing Guide](./CONTRIBUTING.md) and issues labeled "good first issue": [![GitHub issues by-label](https://img.shields.io/github/issues/StandardSolvers/ps-code-snippets/good%20first%20issue?style=for-the-badge)](https://github.com/StandardSolvers/ps-code-snippets/contribute)
 <br>
 
 # Features
