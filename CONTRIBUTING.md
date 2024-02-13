@@ -1,4 +1,4 @@
-# Contributing to Spring Boot
+# Contributing to ps-code-snippets
 - ps-code-snippets is released under the Apache 2.0 license. If you would like to contribute something, or want to hack on the code this document should help you get started.
 
 
