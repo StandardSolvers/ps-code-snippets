@@ -35,6 +35,7 @@ build/
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
+.idea/gradle.xml
 .idea/libraries/
 *.iws
 *.iml

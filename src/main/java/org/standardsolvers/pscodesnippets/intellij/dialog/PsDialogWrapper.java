@@ -1,15 +1,9 @@
-package org.standardsolvers.pscodesnippets.intellij.dialog.wrapper;
+package org.standardsolvers.pscodesnippets.intellij.dialog;
 
-import com.intellij.codeInsight.template.Expression;
-import com.intellij.codeInsight.template.ExpressionContext;
-import com.intellij.codeInsight.template.Result;
-import com.intellij.codeInsight.template.TextResult;
-import com.intellij.codeInsight.template.impl.TextExpression;
 import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.Nullable;
 import org.standardsolvers.pscodesnippets.core.PsManager;
 import org.standardsolvers.pscodesnippets.core.PsManagerImplement;
-import org.standardsolvers.pscodesnippets.intellij.TitleCaseMacro;
 import org.standardsolvers.pscodesnippets.solution.Ps;
 
 import javax.swing.*;
@@ -22,11 +16,19 @@ public class PsDialogWrapper extends DialogWrapper {
 
     private JTextField searchTextField;
     private JList<String> psList;
-
-
     PsManager psManager = PsManagerImplement.getInstance();
     private List<Ps> allPss;
-    private DefaultListModel<String> listModel;
+    private String context;
+    // 다른 코드들
+
+    public void setContext(String context) {
+        this.context = context;
+    }
+
+    // 선택된 PS의 컨텍스트를 반환하는 메서드
+    public String getContext() {
+        return context;
+    }
     public PsDialogWrapper() {
         super(true);
         setTitle("PS 코드 목록");
@@ -94,11 +96,6 @@ public class PsDialogWrapper extends DialogWrapper {
                 .map(Ps::getName)
                 .toList();
 
-
-//        List<String> classNames = allPss.stream()
-//                .map(ps -> ps.getClass().getSimpleName())
-//                .toList();
-
         String[] array = classNames.toArray(new String[0]);
         psList.setSelectedIndex(0);
         psList.setListData(array);
@@ -112,33 +109,12 @@ public class PsDialogWrapper extends DialogWrapper {
 
     @Override
     protected void doOKAction() {
-        System.out.println("ok 버튼 !! ");
         int selectedIndex = psList.getSelectedIndex();
-
         if (selectedIndex >= 0) {
-            String selectedPsName = psList.getModel().getElementAt(selectedIndex);
-            System.out.println("Selected Ps Name: " + selectedPsName);
             Ps selectedPs = allPss.get(selectedIndex);
             System.out.println("selectedPs = " + selectedPs);
             String context = selectedPs.getContext();
-
-            // Create a TitleCaseMacro instance
-            TitleCaseMacro titleCaseMacro = new TitleCaseMacro();
-
-            // Create a result based on the selected ps's context
-            Result result = titleCaseMacro.calculateResult(new Expression[]{new TextExpression(context)}, (ExpressionContext) ExpressionContext.SELECTION, true);
-
-            if (result != null && result instanceof TextResult) {
-                // Get the transformed context
-                String transformedContext = ((TextResult) result).getText();
-
-                // Print the transformed context
-                System.out.println("Transformed Context: " + transformedContext);
-
-                // Now you can use the transformed context as needed
-                // For example, you can insert it into the code area of IntelliJ IDEA
-                // Or display it in a dialog
-            }
+            setContext(context);
         } else {
             // No ps selected, handle accordingly
             System.out.println("No ps selected");
