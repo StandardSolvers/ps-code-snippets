@@ -59,14 +59,15 @@ public class SimplePsImplement<T> implements Ps<T> {
 
             Pattern pattern = Pattern.compile("public\\s+class");
             Matcher matcher = pattern.matcher(content);
-            int start = matcher.find() ? matcher.start() : -1;
+            boolean isMatched = pattern.matcher(content).find();
+            int start = isMatched ? matcher.start() : -1;
             int end = content.lastIndexOf("}");
 
             // Check if the indexes are valid and the word "class" is present
-            if (start >= 0 && end >= 0 && start < end && content.contains("class")) {
+            if (start >= 0 && end >= 0 && start < end) {
                 return content.substring(start, end+1).trim();  // Include the end brace
             } else {
-                return "";
+                throw new IOException("'public class' was not found");
             }
         } catch (IOException ignored) {
             return "";
