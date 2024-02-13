@@ -33,7 +33,7 @@ public class PsCompletionProvider<V extends CompletionParameters> extends Comple
             List<Ps> psList = psManager.find(codeBeforeCaret);
 
             psList.forEach(ps -> {
-                String replacement = ps.getContext();
+                String replacement = ps.getBody();
                 LookupElement lookupElement = LookupElementBuilder.create(codeBeforeCaret +": "+ replacement)
                         .withInsertHandler((context1, item) -> {
                             Document document = context1.getDocument();
