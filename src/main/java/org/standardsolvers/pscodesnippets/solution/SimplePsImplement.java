@@ -2,34 +2,51 @@ package org.standardsolvers.pscodesnippets.solution;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SimplePsImplement<T> implements Ps<T> {
-    final String psName;
     final Class<T> statementClass;
-    final String statementString;
+    final String name;
+    final String simpleName;
+    final String context;
+    final String body;
 
-    private SimplePsImplement(String psName, Class<T> statementClass){
+    private SimplePsImplement(String name, String simpleName, Class<T> statementClass){
+        this.name = name;
+        this.simpleName = simpleName;
         this.statementClass = statementClass;
-        this.statementString = findBody(statementClass);
-        this.psName = psName;
+        this.context = findContext(statementClass);
+        this.body = findBody(context);
     }
 
-    public static <T> Ps<T> createInstance(String psName, Class<T> statementClass){
-        return new SimplePsImplement<>(psName, statementClass);
+    public static <T> Ps<T> createInstance(String name, String simpleName, Class<T> statementClass){
+        return new SimplePsImplement<>(name, simpleName, statementClass);
     }
 
     @Override
     public String getName() {
-        return psName;
+        return this.name;
     }
 
     @Override
-    public String getContext(){
-        return this.statementString;
+    public String getSimpleName() {
+        return this.simpleName;
     }
 
-    public String findBody(Class<T> statementClass) {
+
+    @Override
+    public String getContext(){
+        return this.context;
+    }
+
+    @Override
+    public String getBody(){
+        return this.body;
+    }
+
+    public String findContext(Class<T> statementClass) {
         String statementClassFullName = statementClass.getName();
         String resourcePath = "/" + statementClassFullName.replace('.', '/') + ".java";
         InputStream input = statementClass.getResourceAsStream(resourcePath);
@@ -39,17 +56,27 @@ public class SimplePsImplement<T> implements Ps<T> {
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
             String content = reader.lines().collect(Collectors.joining("\n"));
-            int start = content.indexOf("public class");
+
+            Pattern pattern = Pattern.compile("public\\s+class");
+            Matcher matcher = pattern.matcher(content);
+            boolean isMatched = pattern.matcher(content).find();
+            int start = isMatched ? matcher.start() : -1;
             int end = content.lastIndexOf("}");
 
             // Check if the indexes are valid and the word "class" is present
-            if (start >= 0 && end >= 0 && start < end && content.contains("class")) {
+            if (start >= 0 && end >= 0 && start < end) {
                 return content.substring(start, end+1).trim();  // Include the end brace
             } else {
-                return "";
+                throw new IOException("'public class' was not found");
             }
         } catch (IOException ignored) {
             return "";
         }
+    }
+
+    public String findBody(String context){
+        String body = context.replaceAll("public\\s+class\\s+\\w+\\s*\\{", "").trim();
+        body = body.substring(0, body.lastIndexOf("}")).trim();
+        return body;
     }
 }

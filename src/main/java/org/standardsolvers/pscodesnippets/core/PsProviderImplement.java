@@ -22,23 +22,34 @@ public class PsProviderImplement implements PsProvider {
     }
 
     @Override
-    public PsProviderImplement initPsClassMap(){
-        Set<Class<? extends Ps>> list = findAllPsClass();
+    public PsProvider initPsClassMap(){
+        List<Class<? extends Ps>> psClassList = findAllPsClass().stream().toList();
         psClassMap = new HashMap<>();
-        for (Class<? extends Ps> psClass : list) {
+        cachePsClassMapByList(psClassList);
+        return this;
+    }
+
+    @Override
+    public PsProvider initSolutionStatementClassMap(){
+        solutionStatementClassMap = new HashMap<>();
+        if(psClassMap.isEmpty()){
+            initPsClassMap();
+        }
+
+        List<Class<?>> solutionStatementClassList = findAllSolutionStatementClass();
+        tryCacheSolutionStatementClassByList(solutionStatementClassList);
+        return this;
+    }
+    @Override
+    public PsProvider cachePsClassMapByList(List<Class<? extends Ps>> psClassList){
+        for (Class<? extends Ps> psClass : psClassList) {
             psClassMap.put(psClass.getName(), psClass);
         }
         return this;
     }
 
     @Override
-    public PsProviderImplement initSolutionStatementClassMap(){
-        solutionStatementClassMap = new HashMap<>();
-        if(psClassMap.isEmpty()){
-            initPsClassMap();
-        }
-        List<Class<?>> solutionStatementClassList = findAllSolutionStatementClass();
-
+    public PsProvider tryCacheSolutionStatementClassByList(List<Class<?>> solutionStatementClassList){
         for (Class<? extends Ps> psClass : psClassMap.values()) {
             Class<?> solutionStatementClass = solutionStatementClassList.stream()
                     .filter(clazz->clazz.getAnnotation(SolutionStatement.class).ps().equals(psClass))
@@ -47,30 +58,6 @@ public class PsProviderImplement implements PsProvider {
             solutionStatementClassMap.put(psClass.getName(), solutionStatementClass);
         }
         return this;
-    }
-
-    @Override
-    public List<String> findPsFullClassName(String psName){
-        return psClassMap.keySet().stream().filter(s->s.contains(psName)).toList();
-    }
-
-    @Override
-    public List<Ps> find(String psName) {
-        List<Ps> result = new ArrayList<>();
-
-        List<String> psFullClassNameList = findPsFullClassName(psName);
-
-        for (String fullClassName : psFullClassNameList) {
-            try {
-                Class<? extends Ps> psClass = psClassMap.get(fullClassName);
-
-                Ps ps = constructPs(psClass).orElseThrow(ClassNotFoundException::new);
-                result.add(ps);
-
-            } catch (ClassNotFoundException ignored) {
-            }
-        }
-        return result;
     }
 
     @Override
@@ -97,7 +84,7 @@ public class PsProviderImplement implements PsProvider {
 
         try{
             Class<?> statementClass = solutionStatementClassMap.get(psClass.getName());
-            Ps<?> ps = SimplePsImplement.createInstance(psClass.getName(), statementClass);
+            Ps<?> ps = SimplePsImplement.createInstance(psClass.getName(), psClass.getSimpleName(), statementClass);
             return Optional.of(ps);
 
         } catch (Exception exception){
