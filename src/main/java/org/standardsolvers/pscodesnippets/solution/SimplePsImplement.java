@@ -5,16 +5,18 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 public class SimplePsImplement<T> implements Ps<T> {
+    final Class<T> statementClass;
     final String name;
     final String simpleName;
-    final Class<T> statementClass;
-    final String statementString;
+    final String context;
+    final String body;
 
     private SimplePsImplement(String name, String simpleName, Class<T> statementClass){
-        this.statementClass = statementClass;
-        this.statementString = findBody(statementClass);
         this.name = name;
         this.simpleName = simpleName;
+        this.statementClass = statementClass;
+        this.context = findContext(statementClass);
+        this.body = findBody(context);
     }
 
     public static <T> Ps<T> createInstance(String name, String simpleName, Class<T> statementClass){
@@ -34,10 +36,15 @@ public class SimplePsImplement<T> implements Ps<T> {
 
     @Override
     public String getContext(){
-        return this.statementString;
+        return this.context;
     }
 
-    public String findBody(Class<T> statementClass) {
+    @Override
+    public String getBody(){
+        return this.body;
+    }
+
+    public String findContext(Class<T> statementClass) {
         String statementClassFullName = statementClass.getName();
         String resourcePath = "/" + statementClassFullName.replace('.', '/') + ".java";
         InputStream input = statementClass.getResourceAsStream(resourcePath);
@@ -59,5 +66,11 @@ public class SimplePsImplement<T> implements Ps<T> {
         } catch (IOException ignored) {
             return "";
         }
+    }
+
+    public String findBody(String context){
+        String body = context.replaceAll("public\\s+class\\s+\\w+\\s*\\{", "").trim();
+        body = body.substring(0, body.lastIndexOf("}")).trim();
+        return body;
     }
 }

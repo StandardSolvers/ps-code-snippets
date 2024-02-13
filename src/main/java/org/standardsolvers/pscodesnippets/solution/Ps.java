@@ -4,4 +4,5 @@ public interface Ps<V>{
     String getName();
     String getSimpleName();
     String getContext();
+    String getBody();
 }

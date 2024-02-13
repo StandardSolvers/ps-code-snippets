@@ -12,11 +12,12 @@ public interface PsProvider {
     Package psPack = Ps.class.getPackage();
     Package statementPack = SolutionStatement.class.getPackage();
 
-    PsProviderImplement initPsClassMap();
-    PsProviderImplement initSolutionStatementClassMap();
-    List<Ps> find(String psName);
+    PsProvider initPsClassMap();
+    PsProvider initSolutionStatementClassMap();
+    PsProvider cachePsClassMapByList(List<Class<? extends Ps>> psClassList);
+    PsProvider tryCacheSolutionStatementClassByList(List<Class<?>> solutionStatementClassList);
+
     Map<String, List<Ps>> findAll();
-    List<String> findPsFullClassName(String psName);
     Set<Class<? extends Ps>> findAllPsClass();
     List<Class<?>> findAllSolutionStatementClass();
     Optional<Ps> constructPs(Class<? extends Ps> psClass);
