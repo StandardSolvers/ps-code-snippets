@@ -10,6 +10,8 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 public class PsDialogWrapper extends DialogWrapper {
@@ -26,6 +28,7 @@ public class PsDialogWrapper extends DialogWrapper {
     public String getContext() {
         return context;
     }
+
     public PsDialogWrapper() {
         super(true);
         setTitle("PS 코드 목록");
@@ -44,32 +47,56 @@ public class PsDialogWrapper extends DialogWrapper {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 updatePsList();
+
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 updatePsList();
+
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                // Plain text components do not fire these events
+
             }
         });
+
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+            @Override
+            public boolean dispatchKeyEvent(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_DOWN) {
+                    SwingUtilities.invokeLater(() -> {
+                        psList.requestFocusInWindow();
+                        psList.requestFocus();
+                    });
+                } else if (keyCode == KeyEvent.VK_UP) {
+                    SwingUtilities.invokeLater(() -> {
+                        psList.requestFocusInWindow();
+                        psList.requestFocus();
+                    });
+                } else {
+                    SwingUtilities.invokeLater(() -> {
+                        searchTextField.requestFocusInWindow();
+                        searchTextField.requestFocus();
+                    });
+                }
+                return false;
+            }
+        });
+
+
         refreshPsList();
         centerPanel.add(new JScrollPane(psList), BorderLayout.CENTER);
         psList.setSelectedIndex(0);
-        SwingUtilities.invokeLater(() -> {
-            psList.requestFocusInWindow();
-            psList.requestFocus();
-        });
         return centerPanel;
     }
 
     private void updatePsList() {
         String searchText = searchTextField.getText().toLowerCase();
         List<String> filteredPsNames = allPss.stream()
-                .map(Ps::getName)
+                .map(Ps::getSimpleName)
                 .filter(className -> className.toLowerCase().contains(searchText))
                 .toList();
 
@@ -90,7 +117,6 @@ public class PsDialogWrapper extends DialogWrapper {
         psList.setSelectedIndex(0);
         psList.setListData(array);
     }
-
 
 
     @Override
