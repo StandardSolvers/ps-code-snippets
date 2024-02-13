@@ -98,8 +98,7 @@ public class PsDialogWrapper extends DialogWrapper {
         int selectedIndex = psList.getSelectedIndex();
         if (selectedIndex >= 0) {
             Ps selectedPs = allPss.get(selectedIndex);
-            System.out.println("selectedPs = " + selectedPs);
-            String context = selectedPs.getContext();
+            String context = selectedPs.getBody();
             setContext(context);
         } else {
             System.out.println("No ps selected");
