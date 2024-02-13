@@ -59,7 +59,7 @@ public class SimplePsImplement<T> implements Ps<T> {
 
             Pattern pattern = Pattern.compile("public\\s+class");
             Matcher matcher = pattern.matcher(content);
-            boolean isMatched = pattern.matcher(content).find();
+            boolean isMatched = matcher.find();
             int start = isMatched ? matcher.start() : -1;
             int end = content.lastIndexOf("}");
 
