@@ -2,6 +2,8 @@ package org.standardsolvers.pscodesnippets.solution;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SimplePsImplement<T> implements Ps<T> {
@@ -54,7 +56,10 @@ public class SimplePsImplement<T> implements Ps<T> {
         }
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8))) {
             String content = reader.lines().collect(Collectors.joining("\n"));
-            int start = content.indexOf("public class");
+
+            Pattern pattern = Pattern.compile("public\\s+class");
+            Matcher matcher = pattern.matcher(content);
+            int start = matcher.find() ? matcher.start() : -1;
             int end = content.lastIndexOf("}");
 
             // Check if the indexes are valid and the word "class" is present
