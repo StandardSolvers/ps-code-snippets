@@ -1,31 +1,40 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
-  <id>org.standardsolvers.ps-code-snippets</id>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>org.standardsolvers.ps-code-snippets</id>
 
-  <!-- Public plugin name should be written in Title Case.
+    <!-- Public plugin name should be written in Title Case.
        Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-  <name>ps-code-snippets</name>
+    <name>Ps Code Snippets</name>
+    <version>1.0.0</version>
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://github.com/StandardSolvers/ps-code-snippets">StandardSolvers</vendor>
 
-  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-  <vendor url="https://github.com/StandardSolvers/ps-code-snippets">StandardSolvers</vendor>
-
-  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
        Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
        Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
-  <description><![CDATA[
-    this is a plugin for code snippets in intellij idea JetBrains
-  ]]></description>
+    <description><![CDATA[
+    <div><h1>ps-code-snippets</h1></div>
+    <div><h2>made by StandardSolvers</h2></div>
 
-  <!-- Product and plugin compatibility requirements.
+    <div>This is a code snippet plugin for practicing coding tests in Intellij Idea by JetBrains.</div>
+    <div>If you want to know more about how it works, please refer to the GitHub address.</div>
+    <div><a href="https://github.com/StandardSolvers/ps-code-snippets">github.com/StandardSolvers/ps-code-snippets</a></div>
+    ]]></description>
+
+    <change-notes><![CDATA[
+    <div>Nothing has changed yet.</div>
+    ]]></change-notes>
+
+    <!-- Product and plugin compatibility requirements.
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
-  <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.platform</depends>
 
-  <!-- Extension points defined by the plugin.
+    <!-- Extension points defined by the plugin.
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
-  <extensions defaultExtensionNs="com.intellij">
+    <extensions defaultExtensionNs="com.intellij">
     <completion.contributor language="JAVA" implementationClass="org.standardsolvers.pscodesnippets.intellij.completion.PsCompletionContributor"/>
-  </extensions>
+    </extensions>
     <actions>
         <action id="ShowPopUp" class="org.standardsolvers.pscodesnippets.intellij.action.PsPopUp" text="PS List">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
