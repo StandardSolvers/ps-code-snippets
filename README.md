@@ -27,6 +27,8 @@
 # Features
 - Take exactly what's written in the code
 
+![gif](./docs/img/union-find.gif)
+
 # Model
 - intellij
     - completion
@@ -45,3 +47,7 @@
 
 ## UML: Class Diagram
 ![uml](./docs/img/uml.png)
+
+
+
+
