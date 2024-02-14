@@ -123,9 +123,17 @@ public class PsDialogWrapper extends DialogWrapper {
     protected void doOKAction() {
         int selectedIndex = psList.getSelectedIndex();
         if (selectedIndex >= 0) {
-            Ps selectedPs = allPss.get(selectedIndex);
-            String context = selectedPs.getBody();
-            setContext(context);
+            String selectedPsName = psList.getSelectedValue();
+            Ps selectedPs = allPss.stream()
+                    .filter(ps -> ps.getSimpleName().equals(selectedPsName))
+                    .findFirst()
+                    .orElse(null);
+            if (selectedPs != null) {
+                String context = selectedPs.getBody();
+                setContext(context);
+            } else {
+                System.out.println("Failed to retrieve selected Ps");
+            }
         } else {
             System.out.println("No ps selected");
         }
