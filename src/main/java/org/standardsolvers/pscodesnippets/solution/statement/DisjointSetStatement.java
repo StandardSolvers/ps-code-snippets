@@ -5,17 +5,20 @@ import org.standardsolvers.pscodesnippets.solution.ps.DisjointSet;
 
 @SolutionStatement(ps = DisjointSet.class)
 public class DisjointSetStatement {
-    void union(int a, int b) {
+    static void union(int a, int b) {
         a = find(a);
         b = find(b);
+        if (a < b) parent[b] = a;
+        else parent[a] = b;
     }
 
-    int parent[] = new int[101];
+    static int parent[] = new int[101];
 
-    int find(int num) {
+    static int find(int num) {
         if (num == parent[num]) {
             return num;
         }
         return parent[num] = find(parent[num]);
     }
+
 }
