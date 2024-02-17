@@ -31,7 +31,7 @@ public class PsDialogWrapper extends DialogWrapper {
 
     public PsDialogWrapper() {
         super(true);
-        setTitle("PS 코드 목록");
+        setTitle("Code Compilation for Problem Solving");
         init();
     }
 
