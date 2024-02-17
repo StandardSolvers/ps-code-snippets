@@ -27,7 +27,7 @@
 # Features
 - Take exactly what's written in the code
 
-![gif](./docs/img/union-find.gif)
+![gif](./docs/img/disjoint-set.gif)
 
 # Model
 - intellij
