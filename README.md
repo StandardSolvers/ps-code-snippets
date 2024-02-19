@@ -23,6 +23,7 @@
 into the search bar and click the "Search" button or press Enter.
 3. The editor will automatically insert the code snippet related to the entered task.
 <br>
+
 ## Tips:
 - You do not need to enter the complete problem sentence in the search bar.
  You can find relevant snippets by entering only the keywords.
@@ -30,6 +31,7 @@ into the search bar and click the "Search" button or press Enter.
  and extended as needed.
 - Use this plugin to practice coding tests efficiently!
 <br>
+
 ## Additional information:
 - The plugin is available for free on the JetBrains Marketplace.
 - The plugin only supports Java.
