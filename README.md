@@ -24,6 +24,9 @@ into the search bar and click the "Search" button or press Enter.
 3. The editor will automatically insert the code snippet related to the entered task.
 <br>
 
+![gif](./docs/img/disjoint-set.gif)
+<br>
+
 ## Tips:
 - You do not need to enter the complete problem sentence in the search bar.
  You can find relevant snippets by entering only the keywords.
@@ -36,9 +39,6 @@ into the search bar and click the "Search" button or press Enter.
 - The plugin is available for free on the JetBrains Marketplace.
 - The plugin only supports Java.
 - The plugin may not work correctly with all IntelliJ IDEA themes.
-<br>
-
-![gif](./docs/img/disjoint-set.gif)
 <br>
 
 # Contributing
