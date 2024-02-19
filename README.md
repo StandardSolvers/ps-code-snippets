@@ -37,6 +37,7 @@ into the search bar and click the "Search" button or press Enter.
 - The plugin only supports Java.
 - The plugin may not work correctly with all IntelliJ IDEA themes.
 <br>
+
 ![gif](./docs/img/disjoint-set.gif)
 <br>
 
