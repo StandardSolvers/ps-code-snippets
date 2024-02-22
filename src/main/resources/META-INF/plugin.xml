@@ -16,9 +16,31 @@
     <description><![CDATA[
     <div><h1>ps-code-snippets</h1></div>
     <div><h2>made by StandardSolvers</h2></div>
-
-    <div>This is a code snippet plugin for practicing coding tests in Intellij Idea by JetBrains.</div>
-    <div>If you want to know more about how it works, please refer to the GitHub address.</div>
+    <div>PS Code Snippet Plugin for Practicing Coding Tests in JetBrains IntelliJ IDEA</div>
+    <div>This plugin provides a code snippet feature that makes it easy to practice coding tests in JetBrains IntelliJ IDEA.</div>
+    <div></div>
+    <div><h2>How to use:<h2></div>
+    <div>1. Right-click in the editor and select "PS Code Snippet" or press the shortcut key Ctrl+Shift+D.</div>
+    <div>2. In the opened window, type the problem-solving task you want to find directly </div>
+    <div>   into the search bar and click the "Search" button or press Enter.</div>
+    <div>3. The editor will automatically insert the code snippet related to the entered task.</div>
+    <div></div>
+    <div><h2>Tips:</h2></div>
+    <div>- You do not need to enter the complete problem sentence in the search bar.</div>
+    <div>  You can find relevant snippets by entering only the keywords.</div>
+    <div>- Snippets can be used as a starting point for solving problems and can be modified</div>
+    <div>  and extended as needed.</div>
+    <div></div>
+    <div>Use this plugin to practice coding tests efficiently!</div>
+    <div></div>
+    <div><h2>Additional information:</h2></div>
+    <div>- The plugin is available for free on the JetBrains Marketplace.</div>
+    <div>- The plugin only supports Java.</div>
+    <div>- The plugin may not work correctly with all IntelliJ IDEA themes.</div>
+    <div></div>
+    <div><h2>Feedback:</h2></div>
+    <div>If you have any feedback</div>
+    <div>or want to know more about how it works, please refer to the GitHub address.</div>
     <div><a href="https://github.com/StandardSolvers/ps-code-snippets">github.com/StandardSolvers/ps-code-snippets</a></div>
     ]]></description>
 
